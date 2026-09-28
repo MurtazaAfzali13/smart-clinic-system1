@@ -1,0 +1,296 @@
+{
+  "meta": {
+    "title": "Clinic | Online Appointments",
+    "description": "Book online appointments with the best specialist doctors"
+  },
+  "common": {
+    "loading": "Loading...",
+    "save": "Save",
+    "cancel": "Cancel",
+    "next": "Next step",
+    "back": "Back",
+    "submit": "Submit",
+    "required": "Required",
+    "optional": "Optional",
+    "yes": "Yes",
+    "no": "No",
+    "select": "Select",
+    "retry": "Try again",
+    "error": "Error"
+  },
+  "navbar": {
+    "home": "Home",
+    "services": "Services",
+    "doctors": "Doctors",
+    "gallery": "Gallery",
+    "contact": "Contact",
+    "book_appointment": "Book Appointment",
+    "switch_language": "Switch language",
+    "toggle_menu": "Toggle menu"
+  },
+  "weekdays": {
+    "0": "Sunday",
+    "1": "Monday",
+    "2": "Tuesday",
+    "3": "Wednesday",
+    "4": "Thursday",
+    "5": "Friday",
+    "6": "Saturday"
+  },
+  "doctors": {
+    "title": "Our doctors",
+    "searchPlaceholder": "Search doctor name...",
+    "allSpecialties": "All specialties",
+    "experienceYears": "{years} years of experience",
+    "consultationFee": "Consultation fee",
+    "workingHours": "Working hours",
+    "bookNow": "Book now",
+    "noResults": "No doctors found",
+    "dayOff": "Day off",
+    "eyebrow": "World-Class Experts",
+    "title_main": "Meet the people behind",
+    "title_highlight": "your care",
+    "description": "Consultants trained at leading centres, available in person and by video.",
+    "prev_aria": "Previous specialists",
+    "next_aria": "Next specialists",
+    "view_profile": "View Profile",
+    "items": {
+      "d1": {
+        "name": "Dr. Arman Halabi",
+        "specialty": "Interventional Cardiology"
+      },
+      "d2": {
+        "name": "Dr. Aarna Sharma",
+        "specialty": "Neurology & Stroke Care"
+      },
+      "d3": {
+        "name": "Dr. Luca Moreau",
+        "specialty": "Robotic Surgery"
+      },
+      "d4": {
+        "name": "Dr. Selin Kaya",
+        "specialty": "Pediatrics"
+      }
+    }
+  },
+  "login": {
+    "title": "Log in to your account",
+    "subtitle": "Enter your email and password",
+    "email": "Email",
+    "password": "Password",
+    "submit": "Log in",
+    "noAccount": "Don't have an account?",
+    "register": "Sign up"
+  },
+  "register": {
+    "title": "Patient sign up",
+    "subtitle": "Enter your details to create an account",
+    "fullName": "Full name",
+    "email": "Email",
+    "password": "Password",
+    "submit": "Sign up",
+    "alreadyHaveAccount": "Already have an account?",
+    "login": "Log in"
+  },
+  "patient": {
+    "title": "Patient information",
+    "subtitle": "You must complete all required information before booking an appointment",
+    "steps": {
+      "identity": "Identity",
+      "contact": "Contact and address",
+      "medical": "Medical information",
+      "emergency": "Emergency contact",
+      "insurance": "Insurance",
+      "consent": "Consent"
+    },
+    "fields": {
+      "firstName": "First name",
+      "lastName": "Last name",
+      "fatherName": "Father's name",
+      "nationalId": "National ID / Passport number",
+      "dateOfBirth": "Date of birth",
+      "gender": "Gender",
+      "male": "Male",
+      "female": "Female",
+      "other": "Other",
+      "maritalStatus": "Marital status",
+      "single": "Single",
+      "married": "Married",
+      "divorced": "Divorced",
+      "widowed": "Widowed",
+      "nationality": "Nationality",
+      "occupation": "Occupation",
+      "phone": "Mobile phone number",
+      "altPhone": "Second phone number",
+      "country": "Country",
+      "stateProvince": "State / Province",
+      "city": "City",
+      "addressLine": "Full address",
+      "postalCode": "Postal code",
+      "bloodType": "Blood type",
+      "unknown": "Unknown",
+      "height": "Height (cm)",
+      "weight": "Weight (kg)",
+      "smokingStatus": "Smoking",
+      "never": "Never",
+      "former": "Former smoker",
+      "current": "Current smoker",
+      "usesAlcohol": "Alcohol use",
+      "isPregnant": "I am pregnant",
+      "familyHistory": "Family medical history",
+      "allergies": "Allergies",
+      "chronicConditions": "Chronic conditions",
+      "currentMedications": "Current medications",
+      "surgeries": "Past surgeries",
+      "emergencyFullName": "Full name",
+      "emergencyRelationship": "Relationship to you",
+      "emergencyPhone": "Phone number",
+      "insuranceProvider": "Insurance provider",
+      "insuranceNumber": "Insurance number",
+      "insuranceExpiry": "Insurance expiry date",
+      "consent": "I agree to the storage and processing of my medical information"
+    },
+    "errors": {
+      "invalidPhone": "Phone number is not valid",
+      "dateInFuture": "Date cannot be in the future",
+      "profileIncomplete": "Please complete your information before booking"
+    }
+  },
+  "booking": {
+    "title": "Book an appointment",
+    "doctor": "Dr.",
+    "selectDate": "Select a date",
+    "availableSlots": "Available times",
+    "noSlots": "No available times",
+    "chooseAnotherDate": "Please choose another date",
+    "reason": "Reason for visit",
+    "symptoms": "Symptoms",
+    "symptomDuration": "How long have you had the symptoms?",
+    "firstVisit": "This is my first visit",
+    "notes": "Additional notes",
+    "confirm": "Confirm and book",
+    "booking": "Booking...",
+    "successTitle": "Your appointment has been booked",
+    "trackingCode": "Tracking code",
+    "slotTaken": "This time is no longer available. Please choose another time"
+  },
+  "hero": {
+    "emergency_call": "Emergency Quick Call:",
+    "badge": "Smart Hospital · AI Clinic",
+    "title_main": "Advanced Healthcare Solutions,",
+    "title_highlight": "Powered by AI",
+    "description": "Precision diagnostics, world-class specialists and round-the-clock intelligent monitoring — care designed around you.",
+    "cta_primary": "Book Appointment",
+    "cta_secondary": "Explore Services",
+    "image_alt": "Modern hospital atrium with medical staff"
+  },
+  "about": {
+    "badge": "Why Choose Us",
+    "title_main": "Human expertise,",
+    "title_highlight": "amplified by machines",
+    "description": "Our clinicians keep every decision. Our technology makes sure nothing is missed — scanning vitals, imaging and history continuously so care starts earlier and recovery lands sooner.",
+    "point_1": "Board-certified specialists across 22 disciplines",
+    "point_2": "AI triage that flags critical findings in under 60 seconds",
+    "point_3": "Single digital record shared across every department",
+    "point_4": "Transparent pricing with no surprise billing",
+    "cta": "Talk to a specialist",
+    "alt_or": "Robotic operating theatre",
+    "alt_lounge": "Hospital waiting lounge",
+    "alt_ai": "Doctor reviewing AI imaging"
+  },
+  "services": {
+    "eyebrow": "Our Excellence",
+    "title_main": "Departments built around",
+    "title_highlight": "outcomes",
+    "description": "Every unit pairs senior clinicians with intelligent systems that never stop watching.",
+    "learn_more": "Learn more",
+    "items": {
+      "cardiology": {
+        "title": "Cardiology",
+        "text": "Interventional cardiology, 3D echo imaging and continuous rhythm monitoring by senior consultants."
+      },
+      "neurology": {
+        "title": "Neurology",
+        "text": "Stroke unit, epilepsy mapping and neuro-rehabilitation programs."
+      },
+      "ai_diagnosis": {
+        "title": "AI Diagnosis",
+        "text": "Imaging analysed in seconds by clinically validated models, reviewed by specialists."
+      },
+      "emergency": {
+        "title": "Emergency",
+        "text": "Trauma-ready ER with a 6-minute average triage time, open 24/7."
+      },
+      "imaging": {
+        "title": "Imaging Lab",
+        "text": "3T MRI, low-dose CT and same-day reporting."
+      },
+      "pediatrics": {
+        "title": "Pediatrics",
+        "text": "Gentle, family-centred care for every age."
+      }
+    }
+  },
+  "stats": {
+    "years_value": "15+",
+    "years_label": "Years Experience",
+    "specialists_value": "50+",
+    "specialists_label": "Specialists",
+    "patients_value": "10k+",
+    "patients_label": "Happy Patients",
+    "support_value": "24/7",
+    "support_label": "AI Support"
+  },
+  "gallery": {
+    "eyebrow": "Inside NovaCare",
+    "title_main": "A hospital that feels",
+    "title_highlight": "calm",
+    "description": "Operating rooms, imaging suites and recovery spaces designed for clarity and comfort.",
+    "items": {
+      "mri": "MRI imaging suite",
+      "room": "Private recovery room",
+      "exterior": "Hospital exterior at night",
+      "emergency": "Emergency department",
+      "or": "Operating theatre",
+      "lounge": "Reception lounge"
+    }
+  },
+  "testimonials": {
+    "eyebrow": "Patient Stories",
+    "title_main": "Trusted by families",
+    "title_highlight": "every day",
+    "items": {
+      "r1": {
+        "name": "Mariam Rahimi",
+        "role": "Cardiology patient",
+        "text": "The AI scan flagged something my previous clinic missed. Surgery happened within 48 hours and I was home in four days."
+      },
+      "r2": {
+        "name": "Daniel Okonkwo",
+        "role": "Parent",
+        "text": "Our daughter was terrified of hospitals. The pediatric team turned the whole visit into something she talks about happily."
+      },
+      "r3": {
+        "name": "Leila Haidari",
+        "role": "Neurology patient",
+        "text": "Every doctor already knew my history. No repeating myself, no lost files — it just worked, start to finish."
+      }
+    }
+  },
+  "cta_banner": {
+    "title": "Ready to prioritize your health? Schedule your visit today.",
+    "description": "Same-week appointments with senior specialists, plus instant AI pre-assessment.",
+    "button": "Book Now"
+  },
+  "footer": {
+    "description": "A smart hospital where senior clinicians and clinical AI work side by side — open 24 hours, every day of the year.",
+    "quick_links_title": "Quick Links",
+    "departments_title": "Departments",
+    "contact_title": "Contact",
+    "careers": "Careers",
+    "address": "12 Darulaman Road, Kabul, Afghanistan",
+    "emergency_phone": "Emergency 115 · +93 20 123 4567",
+    "copyright": "NovaCare Smart Hospital. All rights reserved.",
+    "social_aria": "Social link"
+  }
+}
