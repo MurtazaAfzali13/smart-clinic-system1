@@ -2,19 +2,18 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
-import { LayoutGrid, UserRound, ConciergeBell, FileText, Receipt, Boxes, FolderKanban, Landmark, ArrowLeftRight, Settings, Moon, ChevronLeft } from "lucide-react";
+import { LayoutGrid, CalendarCheck, Stethoscope, UserRound, ClipboardList, Building2, BarChart3, ShieldCheck, Settings, Moon, ChevronLeft } from "lucide-react";
 import { useI18n, useT } from "@/lib/i18n/i18n-provider";
 
 const NAV = [
   ["dashboard", LayoutGrid, ""],
-  ["clients", UserRound, "/clients"],
-  ["services", ConciergeBell, "/services"],
-  ["invoices", FileText, "/invoices"],
-  ["expenses", Receipt, "/expenses"],
-  ["inventory", Boxes, "/inventory"],
-  ["projects", FolderKanban, "/projects"],
-  ["accounts", Landmark, "/accounts"],
-  ["transactions", ArrowLeftRight, "/transactions"],
+  ["appointments", CalendarCheck, "/appointments"],
+  ["doctors", Stethoscope, "/doctors"],
+  ["patients", UserRound, "/patients"],
+  ["prescriptions", ClipboardList, "/prescriptions"],
+  ["specialties", Building2, "/specialties"],
+  ["reports", BarChart3, "/reports"],
+  ["users", ShieldCheck, "/users"],
 ] as const;
 
 export function Sidebar() {

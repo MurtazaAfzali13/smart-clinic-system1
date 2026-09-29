@@ -294,11 +294,11 @@
     "copyright": "بیمارستان هوشمند نوا‌کر. تمامی حقوق محفوظ است.",
     "social_aria": "پیوند شبکه اجتماعی"
   },
-   "dashboard": {
+    "dashboard": {
     "sidebar": {
       "brand": {
-        "name": "فایننسز",
-        "caption": "مدیریت مالی"
+        "name": "نام شفاخانه",
+        "caption": "پنل مدیریت"
       },
       "collapseAria": "جمع کردن نوار کناری",
       "currencyAria": "واحد پول",
@@ -309,37 +309,33 @@
           "title": "داشبورد",
           "subtitle": "نمای کلی و تحلیل"
         },
-        "clients": {
-          "title": "مشتریان",
-          "subtitle": "مدیریت مشتریان"
+        "appointments": {
+          "title": "نوبت‌ها",
+          "subtitle": "مدیریت رزروها"
         },
-        "services": {
-          "title": "خدمات",
-          "subtitle": "فهرست خدمات"
+        "doctors": {
+          "title": "پزشکان",
+          "subtitle": "پروفایل و برنامه کاری"
         },
-        "invoices": {
-          "title": "فاکتورها",
-          "subtitle": "صدور و پرداخت"
+        "patients": {
+          "title": "بیماران",
+          "subtitle": "پرونده و اطلاعات تماس"
         },
-        "expenses": {
-          "title": "هزینه‌ها",
-          "subtitle": "پیگیری هزینه"
+        "prescriptions": {
+          "title": "نسخه‌ها",
+          "subtitle": "نسخه‌نویسی و داروها"
         },
-        "inventory": {
-          "title": "انبار",
-          "subtitle": "مدیریت موجودی"
+        "specialties": {
+          "title": "تخصص‌ها",
+          "subtitle": "بخش‌های درمانی"
         },
-        "projects": {
-          "title": "پروژه‌ها",
-          "subtitle": "مدیریت پروژه"
+        "reports": {
+          "title": "گزارش‌ها",
+          "subtitle": "درآمد و آمار"
         },
-        "accounts": {
-          "title": "حساب‌ها",
-          "subtitle": "حساب‌های مالی"
-        },
-        "transactions": {
-          "title": "تراکنش‌ها",
-          "subtitle": "نقل و انتقال پول"
+        "users": {
+          "title": "کاربران و دسترسی‌ها",
+          "subtitle": "کنترل سطح دسترسی"
         }
       }
     },
@@ -385,4 +381,5 @@
       "expected": "در انتظار"
     }
   }
+
 }

@@ -297,8 +297,8 @@
   "dashboard": {
     "sidebar": {
       "brand": {
-        "name": "Finances",
-        "caption": "Management"
+        "name": "Clinic Name",
+        "caption": "Admin Panel"
       },
       "collapseAria": "Collapse sidebar",
       "currencyAria": "Currency",
@@ -309,37 +309,33 @@
           "title": "Dashboard",
           "subtitle": "Overview & analytics"
         },
-        "clients": {
-          "title": "Clients",
-          "subtitle": "Manage customers"
+        "appointments": {
+          "title": "Appointments",
+          "subtitle": "Manage bookings"
         },
-        "services": {
-          "title": "Services",
-          "subtitle": "Service catalog"
+        "doctors": {
+          "title": "Doctors",
+          "subtitle": "Profiles & schedules"
         },
-        "invoices": {
-          "title": "Invoices",
-          "subtitle": "Billing & payments"
+        "patients": {
+          "title": "Patients",
+          "subtitle": "Records & contacts"
         },
-        "expenses": {
-          "title": "Expenses",
-          "subtitle": "Track spending"
+        "prescriptions": {
+          "title": "Prescriptions",
+          "subtitle": "Prescribing & medications"
         },
-        "inventory": {
-          "title": "Inventory",
-          "subtitle": "Stock management"
+        "specialties": {
+          "title": "Specialties",
+          "subtitle": "Departments"
         },
-        "projects": {
-          "title": "Projects",
-          "subtitle": "Project management"
+        "reports": {
+          "title": "Reports",
+          "subtitle": "Revenue & insights"
         },
-        "accounts": {
-          "title": "Accounts",
-          "subtitle": "Financial accounts"
-        },
-        "transactions": {
-          "title": "Transactions",
-          "subtitle": "Money movements"
+        "users": {
+          "title": "Users & Roles",
+          "subtitle": "Access control"
         }
       }
     },
@@ -385,4 +381,5 @@
       "expected": "Expected"
     }
   }
+
 }
