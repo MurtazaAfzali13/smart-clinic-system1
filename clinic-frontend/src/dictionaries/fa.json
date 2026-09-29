@@ -21,7 +21,7 @@
   "navbar": {
     "home": "خانه",
     "services": "خدمات",
-    "dashboard":"داشبورد",
+    "dashboard": "داشبورد",
     "doctors": "پزشکان",
     "gallery": "گالری",
     "contact": "تماس با ما",
@@ -80,6 +80,7 @@
     "email": "ایمیل",
     "password": "رمز عبور",
     "submit": "ورود",
+    "submitting": "در حال ورود...",
     "noAccount": "حساب ندارید؟",
     "register": "ثبت‌نام"
   },
@@ -90,8 +91,26 @@
     "email": "ایمیل",
     "password": "رمز عبور",
     "submit": "ثبت‌نام",
+    "submitting": "در حال ثبت‌نام...",
     "alreadyHaveAccount": "حساب دارید؟",
     "login": "ورود"
+  },
+  "auth": {
+    "logout": "خروج",
+    "errors": {
+      "emailRequired": "ایمیل را وارد کنید",
+      "emailInvalid": "ایمیل معتبر نیست",
+      "emailTaken": "این ایمیل قبلاً ثبت شده است",
+      "passwordRequired": "رمز عبور را وارد کنید",
+      "passwordShort": "رمز عبور باید حداقل ۸ حرف باشد",
+      "passwordLong": "رمز عبور خیلی طولانی است",
+      "passwordWeak": "رمز عبور به‌اندازه‌ی کافی قوی نیست",
+      "fullNameShort": "نام باید حداقل ۲ حرف باشد",
+      "fullNameLong": "نام خیلی طولانی است",
+      "invalidCredentials": "ایمیل یا رمز عبور اشتباه است",
+      "accountDisabled": "این حساب غیرفعال شده است",
+      "generic": "مشکلی پیش آمد، دوباره تلاش کنید"
+    }
   },
   "patient": {
     "title": "اطلاعات بیمار",
@@ -294,7 +313,7 @@
     "copyright": "بیمارستان هوشمند نوا‌کر. تمامی حقوق محفوظ است.",
     "social_aria": "پیوند شبکه اجتماعی"
   },
-    "dashboard": {
+  "dashboard": {
     "sidebar": {
       "brand": {
         "name": "نام شفاخانه",
@@ -381,5 +400,4 @@
       "expected": "در انتظار"
     }
   }
-
 }

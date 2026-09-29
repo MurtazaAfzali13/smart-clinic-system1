@@ -21,7 +21,7 @@
   "navbar": {
     "home": "Home",
     "services": "Services",
-    "dashboard":"Dashboard",
+    "dashboard": "Dashboard",
     "doctors": "Doctors",
     "gallery": "Gallery",
     "contact": "Contact",
@@ -75,23 +75,42 @@
     }
   },
   "login": {
-    "title": "Log in to your account",
+    "title": "Sign in to your account",
     "subtitle": "Enter your email and password",
     "email": "Email",
     "password": "Password",
-    "submit": "Log in",
+    "submit": "Sign in",
+    "submitting": "Signing in...",
     "noAccount": "Don't have an account?",
-    "register": "Sign up"
+    "register": "Register"
   },
   "register": {
-    "title": "Patient sign up",
-    "subtitle": "Enter your details to create an account",
+    "title": "Patient registration",
+    "subtitle": "Enter the details below to create your account",
     "fullName": "Full name",
     "email": "Email",
     "password": "Password",
-    "submit": "Sign up",
+    "submit": "Register",
+    "submitting": "Creating account...",
     "alreadyHaveAccount": "Already have an account?",
-    "login": "Log in"
+    "login": "Sign in"
+  },
+  "auth": {
+    "logout": "Log out",
+    "errors": {
+      "emailRequired": "Enter your email",
+      "emailInvalid": "Email is not valid",
+      "emailTaken": "This email is already registered",
+      "passwordRequired": "Enter your password",
+      "passwordShort": "Password must be at least 8 characters",
+      "passwordLong": "Password is too long",
+      "passwordWeak": "Password is not strong enough",
+      "fullNameShort": "Name must be at least 2 characters",
+      "fullNameLong": "Name is too long",
+      "invalidCredentials": "Email or password is incorrect",
+      "accountDisabled": "This account has been disabled",
+      "generic": "Something went wrong, please try again"
+    }
   },
   "patient": {
     "title": "Patient information",
@@ -381,5 +400,4 @@
       "expected": "Expected"
     }
   }
-
 }
