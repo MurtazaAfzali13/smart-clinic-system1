@@ -21,6 +21,7 @@
   "navbar": {
     "home": "Home",
     "services": "Services",
+    "dashboard":"Dashboard",
     "doctors": "Doctors",
     "gallery": "Gallery",
     "contact": "Contact",
@@ -292,5 +293,96 @@
     "emergency_phone": "Emergency 115 · +93 20 123 4567",
     "copyright": "NovaCare Smart Hospital. All rights reserved.",
     "social_aria": "Social link"
+  },
+  "dashboard": {
+    "sidebar": {
+      "brand": {
+        "name": "Finances",
+        "caption": "Management"
+      },
+      "collapseAria": "Collapse sidebar",
+      "currencyAria": "Currency",
+      "settings": "Settings",
+      "themeAria": "Toggle theme",
+      "nav": {
+        "dashboard": {
+          "title": "Dashboard",
+          "subtitle": "Overview & analytics"
+        },
+        "clients": {
+          "title": "Clients",
+          "subtitle": "Manage customers"
+        },
+        "services": {
+          "title": "Services",
+          "subtitle": "Service catalog"
+        },
+        "invoices": {
+          "title": "Invoices",
+          "subtitle": "Billing & payments"
+        },
+        "expenses": {
+          "title": "Expenses",
+          "subtitle": "Track spending"
+        },
+        "inventory": {
+          "title": "Inventory",
+          "subtitle": "Stock management"
+        },
+        "projects": {
+          "title": "Projects",
+          "subtitle": "Project management"
+        },
+        "accounts": {
+          "title": "Accounts",
+          "subtitle": "Financial accounts"
+        },
+        "transactions": {
+          "title": "Transactions",
+          "subtitle": "Money movements"
+        }
+      }
+    },
+    "topbar": {
+      "greeting": "Good Morning",
+      "title": "Dashboard",
+      "subtitle": "Welcome back! Here's what's happening with your business.",
+      "searchPlaceholder": "Search anything...",
+      "notificationsAria": "Notifications"
+    },
+    "dateFilter": {
+      "label": "Date Filter:",
+      "last7": "Last 7 Days",
+      "thisMonth": "This Month",
+      "thisYear": "This Year",
+      "custom": "Custom"
+    },
+    "kpi": {
+      "totalRevenue": "Total Revenue",
+      "totalExpenses": "Total Expenses",
+      "netProfit": "Net Profit",
+      "outstandingInvoices": "Outstanding Invoices",
+      "vsLastMonth": "vs last month",
+      "invoices": "Invoices"
+    },
+    "charts": {
+      "revenueVsExpenses": "Revenue vs Expenses",
+      "revenue": "Revenue",
+      "expenses": "Expenses",
+      "cashFlow": "Cash Flow Overview",
+      "netCashFlow": "Net Cash Flow",
+      "operating": "Operating Activities",
+      "investing": "Investing Activities",
+      "financing": "Financing Activities",
+      "incomeByProject": "Income by Project",
+      "expenseBreakdown": "Expense Breakdown",
+      "totalExpenses": "Total Expenses"
+    },
+    "transactions": {
+      "title": "Recent Transactions",
+      "viewAll": "View All",
+      "paid": "Paid",
+      "expected": "Expected"
+    }
   }
 }

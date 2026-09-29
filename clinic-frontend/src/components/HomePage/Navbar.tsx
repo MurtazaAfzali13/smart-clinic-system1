@@ -15,8 +15,8 @@ export function Navbar() {
   const currentLocale = pathname.split('/')[1] || 'en';
 
   const links = [
-    { label: t("navbar.home"), href: "#home" },
-    { label: t("navbar.services"), href: "#services" },
+    { label: t("navbar.home"), href: "/" },
+    { label: t("navbar.dashboard"), href: "/dashboard" },
     { label: t("navbar.doctors"), href: "#doctors" },
     { label: t("navbar.gallery"), href: "#gallery" },
     { label: t("navbar.contact"), href: "#contact" },

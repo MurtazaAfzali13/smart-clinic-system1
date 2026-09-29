@@ -21,6 +21,7 @@
   "navbar": {
     "home": "خانه",
     "services": "خدمات",
+    "dashboard":"داشبورد",
     "doctors": "پزشکان",
     "gallery": "گالری",
     "contact": "تماس با ما",
@@ -292,5 +293,96 @@
     "emergency_phone": "اورژانس ۱۱۵ · ‎+۹۳ ۲۰ ۱۲۳ ۴۵۶۷",
     "copyright": "بیمارستان هوشمند نوا‌کر. تمامی حقوق محفوظ است.",
     "social_aria": "پیوند شبکه اجتماعی"
+  },
+   "dashboard": {
+    "sidebar": {
+      "brand": {
+        "name": "فایننسز",
+        "caption": "مدیریت مالی"
+      },
+      "collapseAria": "جمع کردن نوار کناری",
+      "currencyAria": "واحد پول",
+      "settings": "تنظیمات",
+      "themeAria": "تغییر پوسته",
+      "nav": {
+        "dashboard": {
+          "title": "داشبورد",
+          "subtitle": "نمای کلی و تحلیل"
+        },
+        "clients": {
+          "title": "مشتریان",
+          "subtitle": "مدیریت مشتریان"
+        },
+        "services": {
+          "title": "خدمات",
+          "subtitle": "فهرست خدمات"
+        },
+        "invoices": {
+          "title": "فاکتورها",
+          "subtitle": "صدور و پرداخت"
+        },
+        "expenses": {
+          "title": "هزینه‌ها",
+          "subtitle": "پیگیری هزینه"
+        },
+        "inventory": {
+          "title": "انبار",
+          "subtitle": "مدیریت موجودی"
+        },
+        "projects": {
+          "title": "پروژه‌ها",
+          "subtitle": "مدیریت پروژه"
+        },
+        "accounts": {
+          "title": "حساب‌ها",
+          "subtitle": "حساب‌های مالی"
+        },
+        "transactions": {
+          "title": "تراکنش‌ها",
+          "subtitle": "نقل و انتقال پول"
+        }
+      }
+    },
+    "topbar": {
+      "greeting": "صبح بخیر",
+      "title": "داشبورد",
+      "subtitle": "خوش آمدید! این‌ها وضعیت کسب‌وکار شماست.",
+      "searchPlaceholder": "جستجوی هر چیزی...",
+      "notificationsAria": "اعلان‌ها"
+    },
+    "dateFilter": {
+      "label": "بازهٔ زمانی:",
+      "last7": "۷ روز اخیر",
+      "thisMonth": "این ماه",
+      "thisYear": "امسال",
+      "custom": "دلخواه"
+    },
+    "kpi": {
+      "totalRevenue": "درآمد کل",
+      "totalExpenses": "هزینهٔ کل",
+      "netProfit": "سود خالص",
+      "outstandingInvoices": "فاکتورهای معوق",
+      "vsLastMonth": "نسبت به ماه گذشته",
+      "invoices": "فاکتور"
+    },
+    "charts": {
+      "revenueVsExpenses": "درآمد در برابر هزینه",
+      "revenue": "درآمد",
+      "expenses": "هزینه",
+      "cashFlow": "جریان نقدی",
+      "netCashFlow": "جریان نقدی خالص",
+      "operating": "فعالیت‌های عملیاتی",
+      "investing": "فعالیت‌های سرمایه‌گذاری",
+      "financing": "فعالیت‌های تأمین مالی",
+      "incomeByProject": "درآمد به تفکیک پروژه",
+      "expenseBreakdown": "تفکیک هزینه‌ها",
+      "totalExpenses": "هزینهٔ کل"
+    },
+    "transactions": {
+      "title": "تراکنش‌های اخیر",
+      "viewAll": "مشاهدهٔ همه",
+      "paid": "پرداخت‌شده",
+      "expected": "در انتظار"
+    }
   }
 }
