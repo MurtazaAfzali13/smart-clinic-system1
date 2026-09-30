@@ -39,42 +39,6 @@
     "5": "Friday",
     "6": "Saturday"
   },
-  "doctors": {
-    "title": "Our doctors",
-    "searchPlaceholder": "Search doctor name...",
-    "allSpecialties": "All specialties",
-    "experienceYears": "{years} years of experience",
-    "consultationFee": "Consultation fee",
-    "workingHours": "Working hours",
-    "bookNow": "Book now",
-    "noResults": "No doctors found",
-    "dayOff": "Day off",
-    "eyebrow": "World-Class Experts",
-    "title_main": "Meet the people behind",
-    "title_highlight": "your care",
-    "description": "Consultants trained at leading centres, available in person and by video.",
-    "prev_aria": "Previous specialists",
-    "next_aria": "Next specialists",
-    "view_profile": "View Profile",
-    "items": {
-      "d1": {
-        "name": "Dr. Arman Halabi",
-        "specialty": "Interventional Cardiology"
-      },
-      "d2": {
-        "name": "Dr. Aarna Sharma",
-        "specialty": "Neurology & Stroke Care"
-      },
-      "d3": {
-        "name": "Dr. Luca Moreau",
-        "specialty": "Robotic Surgery"
-      },
-      "d4": {
-        "name": "Dr. Selin Kaya",
-        "specialty": "Pediatrics"
-      }
-    }
-  },
   "login": {
     "title": "Sign in to your account",
     "subtitle": "Enter your email and password",
@@ -176,24 +140,6 @@
       "dateInFuture": "Date cannot be in the future",
       "profileIncomplete": "Please complete your information before booking"
     }
-  },
-  "booking": {
-    "title": "Book an appointment",
-    "doctor": "Dr.",
-    "selectDate": "Select a date",
-    "availableSlots": "Available times",
-    "noSlots": "No available times",
-    "chooseAnotherDate": "Please choose another date",
-    "reason": "Reason for visit",
-    "symptoms": "Symptoms",
-    "symptomDuration": "How long have you had the symptoms?",
-    "firstVisit": "This is my first visit",
-    "notes": "Additional notes",
-    "confirm": "Confirm and book",
-    "booking": "Booking...",
-    "successTitle": "Your appointment has been booked",
-    "trackingCode": "Tracking code",
-    "slotTaken": "This time is no longer available. Please choose another time"
   },
   "hero": {
     "emergency_call": "Emergency Quick Call:",
@@ -400,5 +346,65 @@
       "paid": "Paid",
       "expected": "Expected"
     }
+  },
+  "doctors": {
+  "title": "Our Doctors",
+  "subtitle": "Choose your specialist and book an appointment right away",
+  "empty": "No doctors to show right now",
+  "viewProfile": "View & book",
+  "back": "Back to doctors",
+  "yearsExperience": "years of experience",
+  "minutes": "min",
+  "languages": "Languages",
+  "visitLength": "Visit length",
+  "about": "About the doctor",
+  "qualifications": "Qualifications",
+  "notAccepting": "This doctor is not accepting new appointments right now",
+  "pagination": {
+  "label": "Doctors pagination",
+  "prev": "Previous page",
+  "next": "Next page",
+  "page": "Page"
+}
+},
+"booking": {
+  "perVisit": "/ visit",
+  "selectDate": "Choose a day",
+  "selectTime": "Choose a time",
+  "noSlots": "No free slots on this day",
+  "noSlotsWeek": "No free slots in the next 7 days",
+  "visitType": "Visit type",
+  "firstVisit": "First visit",
+  "followUp": "Follow-up",
+  "reason": "Reason for visit",
+  "reasonPlaceholder": "e.g. chest pain during exercise",
+  "symptoms": "Symptoms (optional)",
+  "symptomDuration": "Symptom duration (optional)",
+  "durationPlaceholder": "e.g. 3 days or 2 weeks",
+  "notes": "Additional notes (optional)",
+  "summaryTime": "Appointment time",
+  "summaryDuration": "Visit length",
+  "summaryFee": "Consultation fee",
+  "confirm": "Book appointment",
+  "confirming": "Booking...",
+  "loginToBook": "Sign in to book an appointment",
+  "loginCta": "Sign in",
+  "completeProfile": "Complete your patient profile before booking",
+  "completeProfileCta": "Complete profile",
+  "patientsOnly": "Only patient accounts can book appointments",
+  "successTitle": "Appointment booked",
+  "successText": "Your request is waiting for the doctor's confirmation.",
+  "errors": {
+    "slotRequired": "Please choose a time",
+    "reasonShort": "Describe the reason (at least 3 characters)",
+    "reasonLong": "The reason is too long",
+    "textLong": "This text is too long",
+    "slotTaken": "This time was just booked; please choose another",
+    "patientOverlap": "You already have an appointment at this time",
+    "loginRequired": "Please sign in first",
+    "patientsOnly": "Only patient accounts can book appointments",
+    "profileIncomplete": "Please complete your profile first",
+    "generic": "Something went wrong, please try again"
   }
+}
 }

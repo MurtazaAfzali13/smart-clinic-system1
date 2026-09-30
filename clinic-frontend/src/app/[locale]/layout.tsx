@@ -5,8 +5,9 @@ import { isLocale, localeDirection, locales } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 import { I18nProvider } from "@/lib/i18n/i18n-provider";
 import { createTranslator } from "@/lib/i18n/translate";
+import { SiteNavbar } from "@/components/HomePage/site-navbar";
 import "../globals.css";
-import { Navbar } from "@/components/HomePage/Navbar";
+
 
 type Props = {
   children: ReactNode;
@@ -43,7 +44,7 @@ export default async function LocaleLayout({ children, params }: Props) {
         style={{ fontFamily }}
       >
         <I18nProvider locale={locale} dictionary={dictionary}>
-          <Navbar />
+          <SiteNavbar />
           {children}
         </I18nProvider>
       </body>

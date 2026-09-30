@@ -21,14 +21,22 @@ export function Navbar({ user = null }: { user?: NavbarUser | null }) {
 
   const dashboardHref = user ? `/${locale}${user.dashboardPath}` : null;
   const initial = user?.displayName.trim().charAt(0) ?? "";
+  const bookHref = `/${locale}/doctors`;
 
   const links = [
     { label: t("navbar.home"), href: `/${locale}` },
     ...(dashboardHref ? [{ label: t("navbar.dashboard"), href: dashboardHref }] : []),
-    { label: t("navbar.doctors"), href: `/${locale}#doctors` },
+    { label: t("navbar.doctors"), href: `/${locale}/doctors` },
     { label: t("navbar.gallery"), href: `/${locale}#gallery` },
     { label: t("navbar.contact"), href: `/${locale}#contact` },
   ];
+
+  const isActive = (href: string) => {
+    if (href.includes("#")) return false;
+    return href === `/${locale}`
+      ? pathname === href
+      : pathname === href || pathname.startsWith(`${href}/`);
+  };
 
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
@@ -46,6 +54,9 @@ export function Navbar({ user = null }: { user?: NavbarUser | null }) {
     const newPath = pathname.replace(new RegExp(`^/${locale}(?=/|$)`), `/${nextLocale}`);
     router.push(newPath + window.location.search + window.location.hash);
   };
+
+  const linkBase = "rounded-full px-4 py-2 text-sm font-medium transition-colors";
+  const mobileLinkBase = "block rounded-xl px-4 py-3 text-sm font-medium";
 
   return (
     <motion.header
@@ -74,23 +85,31 @@ export function Navbar({ user = null }: { user?: NavbarUser | null }) {
         </Link>
 
         <ul className="hidden items-center gap-1 lg:flex">
-          {links.map((l) => (
-            <li key={l.href}>
-              <Link
-                href={l.href}
-                className="rounded-full px-4 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
-              >
-                {l.label}
-              </Link>
-            </li>
-          ))}
+          {links.map((l) => {
+            const active = isActive(l.href);
+            return (
+              <li key={l.href}>
+                <Link
+                  href={l.href}
+                  aria-current={active ? "page" : undefined}
+                  className={`${linkBase} ${
+                    active
+                      ? "bg-secondary text-foreground"
+                      : "text-muted-foreground hover:bg-secondary hover:text-foreground"
+                  }`}
+                >
+                  {l.label}
+                </Link>
+              </li>
+            );
+          })}
         </ul>
 
         <div className="flex items-center gap-2">
           <button
             onClick={toggleLanguage}
             aria-label="Switch language"
-            className="glass flex items-center gap-2 rounded-full px-3 py-2 text-xs font-semibold tracking-wide transition-colors hover:bg-secondary uppercase"
+            className="glass flex items-center gap-2 rounded-full px-3 py-2 text-xs font-semibold uppercase tracking-wide transition-colors hover:bg-secondary"
           >
             <Globe className="size-4 text-primary" />
             {locale === "en" ? "FA" : "EN"}
@@ -130,14 +149,16 @@ export function Navbar({ user = null }: { user?: NavbarUser | null }) {
           )}
 
           <Link
-            href={`/${locale}#contact`}
+            href={bookHref}
             className="gradient-surface hidden rounded-full px-5 py-2.5 text-sm font-bold text-primary-foreground transition-transform duration-300 hover:scale-105 sm:inline-flex"
           >
             {t("navbar.book_appointment")}
           </Link>
+
           <button
             onClick={() => setOpen(!open)}
             aria-label="Toggle menu"
+            aria-expanded={open}
             className="glass rounded-full p-2.5 lg:hidden"
           >
             {open ? <X className="size-4" /> : <Menu className="size-4" />}
@@ -148,17 +169,25 @@ export function Navbar({ user = null }: { user?: NavbarUser | null }) {
       {open && (
         <div className="glass mx-4 mt-2 rounded-2xl p-4 lg:hidden">
           <ul className="grid gap-1">
-            {links.map((l) => (
-              <li key={l.href}>
-                <Link
-                  href={l.href}
-                  onClick={() => setOpen(false)}
-                  className="block rounded-xl px-4 py-3 text-sm font-medium text-muted-foreground hover:bg-secondary hover:text-foreground"
-                >
-                  {l.label}
-                </Link>
-              </li>
-            ))}
+            {links.map((l) => {
+              const active = isActive(l.href);
+              return (
+                <li key={l.href}>
+                  <Link
+                    href={l.href}
+                    onClick={() => setOpen(false)}
+                    aria-current={active ? "page" : undefined}
+                    className={`${mobileLinkBase} ${
+                      active
+                        ? "bg-secondary text-foreground"
+                        : "text-muted-foreground hover:bg-secondary hover:text-foreground"
+                    }`}
+                  >
+                    {l.label}
+                  </Link>
+                </li>
+              );
+            })}
 
             <li className="mt-1 grid gap-1 border-t border-border pt-2">
               {user ? (
@@ -170,7 +199,7 @@ export function Navbar({ user = null }: { user?: NavbarUser | null }) {
                     <input type="hidden" name="locale" value={locale} />
                     <button
                       type="submit"
-                      className="block w-full rounded-xl px-4 py-3 text-start text-sm font-medium text-muted-foreground hover:bg-secondary hover:text-foreground"
+                      className={`${mobileLinkBase} w-full text-start text-muted-foreground hover:bg-secondary hover:text-foreground`}
                     >
                       {t("auth.logout")}
                     </button>
@@ -181,14 +210,14 @@ export function Navbar({ user = null }: { user?: NavbarUser | null }) {
                   <Link
                     href={`/${locale}/login`}
                     onClick={() => setOpen(false)}
-                    className="block rounded-xl px-4 py-3 text-sm font-medium text-muted-foreground hover:bg-secondary hover:text-foreground"
+                    className={`${mobileLinkBase} text-muted-foreground hover:bg-secondary hover:text-foreground`}
                   >
                     {t("navbar.login")}
                   </Link>
                   <Link
                     href={`/${locale}/register`}
                     onClick={() => setOpen(false)}
-                    className="block rounded-xl px-4 py-3 text-sm font-medium text-muted-foreground hover:bg-secondary hover:text-foreground"
+                    className={`${mobileLinkBase} text-muted-foreground hover:bg-secondary hover:text-foreground`}
                   >
                     {t("navbar.register")}
                   </Link>
@@ -198,7 +227,7 @@ export function Navbar({ user = null }: { user?: NavbarUser | null }) {
 
             <li>
               <Link
-                href={`/${locale}#contact`}
+                href={bookHref}
                 onClick={() => setOpen(false)}
                 className="gradient-surface mt-2 block rounded-xl px-4 py-3 text-center text-sm font-bold text-primary-foreground"
               >
