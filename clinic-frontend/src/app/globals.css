@@ -67,68 +67,36 @@
 }
 
 :root {
-  --radius: 0.625rem;
+  --radius: 1rem;
+
+  /* رنگ‌های پایه تاریک */
+  --background: oklch(0.17 0.035 248);
+  --foreground: oklch(0.97 0.008 220);
   --surface: oklch(0.22 0.038 248);
   --surface-foreground: oklch(0.97 0.008 220);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
+  
+  /* رنگ‌های جذاب فیروزه‌ای و سبز */
+  --primary: oklch(0.79 0.14 197);
+  --primary-foreground: oklch(0.18 0.04 235);
+  --secondary: oklch(0.28 0.042 245);
+  --secondary-foreground: oklch(0.96 0.008 220);
+  --muted: oklch(0.26 0.036 247);
+  --muted-foreground: oklch(0.73 0.026 230);
+  --accent: oklch(0.74 0.13 178);
+  --accent-foreground: oklch(0.18 0.04 235);
   --emerald: oklch(0.76 0.16 160);
   --emerald-foreground: oklch(0.18 0.04 235);
 
-  --destructive: oklch(0.577 0.245 27.325);
-  --destructive-foreground: oklch(0.98 0.005 220);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
+  --border: oklch(0.99 0 0 / 12%);
+  --input: oklch(0.99 0 0 / 16%);
+  --ring: oklch(0.79 0.14 197);
 
-  --chart-1: oklch(0.87 0 0);
-  --chart-2: oklch(0.556 0 0);
-  --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
-
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
-
-  --gradient-accent: linear-gradient(
-    120deg,
-    oklch(0.82 0.14 205),
-    oklch(0.76 0.13 180) 48%,
-    oklch(0.78 0.16 158)
-  );
-  --gradient-hero: linear-gradient(
-    180deg,
-    oklch(0.17 0.035 248 / 0.55) 0%,
-    oklch(0.19 0.05 210 / 0.72) 45%,
-    oklch(0.17 0.035 248 / 0.97) 100%
-  );
-  --gradient-glass: linear-gradient(
-    145deg,
-    oklch(1 0 0 / 0.1),
-    oklch(1 0 0 / 0.025)
-  );
-  --shadow-glow: 0 0 0 1px oklch(0.79 0.14 197 / 0.18),
-    0 24px 60px -24px oklch(0.79 0.14 197 / 0.5);
+  /* گرادیانت‌ها (این بخش در کد شما درست بود اما برای اطمینان اینجا هست) */
+  --gradient-accent: linear-gradient(120deg, oklch(0.82 0.14 205), oklch(0.76 0.13 180) 48%, oklch(0.78 0.16 158));
+  --gradient-hero: linear-gradient(180deg, oklch(0.17 0.035 248 / 0.55) 0%, oklch(0.19 0.05 210 / 0.72) 45%, oklch(0.17 0.035 248 / 0.97) 100%);
+  --gradient-glass: linear-gradient(145deg, oklch(1 0 0 / 0.1), oklch(1 0 0 / 0.025));
+  --shadow-glow: 0 0 0 1px oklch(0.79 0.14 197 / 0.18), 0 24px 60px -24px oklch(0.79 0.14 197 / 0.5);
   --shadow-elevated: 0 30px 70px -30px oklch(0.08 0.03 245 / 0.9);
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
 }
 
 @layer base {

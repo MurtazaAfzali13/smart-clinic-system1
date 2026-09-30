@@ -27,7 +27,8 @@
     "contact": "تماس با ما",
     "book_appointment": "رزرو نوبت",
     "switch_language": "تغییر زبان",
-    "toggle_menu": "باز و بسته کردن منو"
+    "toggle_menu": "باز و بسته کردن منو",
+    "login":"ورود"
   },
   "weekdays": {
     "0": "یکشنبه",

@@ -27,7 +27,8 @@
     "contact": "Contact",
     "book_appointment": "Book Appointment",
     "switch_language": "Switch language",
-    "toggle_menu": "Toggle menu"
+    "toggle_menu": "Toggle menu",
+    "login":"Sign in"
   },
   "weekdays": {
     "0": "Sunday",
