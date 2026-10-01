@@ -55,27 +55,6 @@ function clinicDates(timeZone: string, count: number): string[] {
     new Date(Date.UTC(y, m - 1, d + i)).toISOString().slice(0, 10),
   );
 }
-
-/** نوبت‌های خالی ۷ روز آینده. تابع دیتابیس فقط ساعت برمی‌گرداند، نه اطلاعات بیماران. */
-export async function getWeekSlots(
-  doctorId: string,
-  timeZone: string,
-  count = 7,
-): Promise<DaySlots[]> {
-  const supabase = await createClient();
-  return Promise.all(
-    clinicDates(timeZone, count).map(async (date) => {
-      const { data, error } = await supabase.rpc("get_available_slots", {
-        p_doctor_id: doctorId,
-        p_date: date,
-      });
-      if (error) throw new Error(error.message);
-      const rows = (data ?? []) as { starts_at: string }[];
-      return { date, slots: rows.map((r) => r.starts_at) };
-    }),
-  );
-}
-
 export async function isPatientProfileCompleted(profileId: string): Promise<boolean> {
   const supabase = await createClient();
   const { data } = await supabase
@@ -84,4 +63,55 @@ export async function isPatientProfileCompleted(profileId: string): Promise<bool
     .eq("profile_id", profileId)
     .maybeSingle();
   return !!data?.profile_completed;
+}
+
+export async function getClinicSchedule(): Promise<{ timeZone: string; closedWeekdays: number[] }> {
+  const supabase = await createClient();
+  const { data } = await supabase
+    .from("clinic_settings")
+    .select("timezone, closed_weekdays")
+    .eq("id", 1)
+    .single();
+  return {
+    timeZone: data?.timezone ?? "UTC",
+    closedWeekdays: (data?.closed_weekdays as number[] | null) ?? [5],
+  };
+}
+
+export async function getWeekSlots(
+  doctorId: string,
+  timeZone: string,
+  closedWeekdays: number[],
+  count = 7,
+): Promise<DaySlots[]> {
+  const supabase = await createClient();
+  return Promise.all(
+    clinicDates(timeZone, count).map(async (date): Promise<DaySlots> => {
+      const dow = new Date(`${date}T00:00:00Z`).getUTCDay(); // 0 = یکشنبه، مثل Postgres
+      if (closedWeekdays.includes(dow)) return { date, closed: true, slots: [] };
+
+      const { data, error } = await supabase.rpc("get_day_slots", {
+        p_doctor_id: doctorId,
+        p_date: date,
+      });
+      if (error) throw new Error(error.message);
+      const rows = (data ?? []) as { starts_at: string; is_booked: boolean }[];
+      return {
+        date,
+        closed: false,
+        slots: rows.map((r) => ({ startsAt: r.starts_at, booked: r.is_booked })),
+      };
+    }),
+  );
+}
+
+export async function isDoctorOwner(doctorId: string, profileId: string): Promise<boolean> {
+  const supabase = await createClient();
+  const { data } = await supabase
+    .from("doctors")
+    .select("id")
+    .eq("id", doctorId)
+    .eq("profile_id", profileId)
+    .maybeSingle();
+  return !!data;
 }

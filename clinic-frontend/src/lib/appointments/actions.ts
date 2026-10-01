@@ -7,6 +7,7 @@ import { resolveLocale } from "@/lib/auth/locale";
 import { toFieldErrors } from "@/lib/auth/schemas";
 import { bookingSchema } from "@/lib/appointments/schemas";
 import type { BookingState } from "@/lib/appointments/types";
+import {DoctorActionState} from "@/lib/appointments/types"
 
 export async function bookAppointmentAction(
   _prev: BookingState,
@@ -38,7 +39,6 @@ export async function bookAppointmentAction(
     return { fieldErrors: toFieldErrors(parsed.error.issues), values };
   }
 
-  // هویت و نقش همیشه از سرور خوانده می‌شود، نه از فرم
   const user = await getCurrentUser();
   if (!user) return { formError: "booking.errors.loginRequired", values };
   if (user.role !== "patient") return { formError: "booking.errors.patientsOnly", values };
@@ -55,8 +55,6 @@ export async function bookAppointmentAction(
   }
 
   const d = parsed.data;
-  // end_at را نمی‌فرستیم: تریگر validate_new_appointment آن را از طول ویزیت پزشک پر می‌کند
-  // و بررسی می‌کند ساعت واقعاً خالی باشد.
   const { error } = await supabase.from("appointments").insert({
     patient_id: patient.id,
     doctor_id: d.doctorId,
@@ -70,7 +68,6 @@ export async function bookAppointmentAction(
 
   if (error) {
     const msg = error.message ?? "";
-    // 23P01 = تداخل زمانی (محدودیت exclusion دیتابیس، امن در برابر دو کلیک هم‌زمان)
     if (error.code === "23P01" && msg.includes("patient_no_overlap")) {
       return { formError: "booking.errors.patientOverlap", values };
     }
@@ -83,4 +80,50 @@ export async function bookAppointmentAction(
 
   revalidatePath(`/${locale}/doctors/${slug}`);
   return { success: { startAt: d.startAt } };
+}
+
+const INTENT_PATCH = {
+  confirm: { status: "confirmed" },
+  complete: { status: "completed" },
+  no_show: { status: "no_show" },
+  cancel: { status: "cancelled" },
+  paid: { is_fee_paid: true },
+  unpaid: { is_fee_paid: false },
+} as const;
+
+export async function updateAppointmentAction(
+  _prev: DoctorActionState,
+  formData: FormData,
+): Promise<DoctorActionState> {
+  const locale = resolveLocale(formData.get("locale"));
+  const slug = String(formData.get("doctorSlug") ?? "");
+  const id = z.string().uuid().safeParse(String(formData.get("appointmentId") ?? ""));
+  const intent = String(formData.get("intent") ?? "");
+
+  if (!id.success || !Object.prototype.hasOwnProperty.call(INTENT_PATCH, intent)) {
+    return { error: "booking.errors.generic" };
+  }
+
+  const user = await getCurrentUser();
+  if (!user) return { error: "booking.errors.loginRequired" };
+  if (user.role !== "doctor") return { error: "doctorView.errors.notAllowed" };
+
+  const supabase = await createClient();
+  const { data, error } = await supabase
+    .from("appointments")
+    .update(INTENT_PATCH[intent as keyof typeof INTENT_PATCH])
+    .eq("id", id.data)
+    .select("id");
+
+  if (error) {
+    return {
+      error: error.message.includes("already closed")
+        ? "doctorView.errors.closed"
+        : "booking.errors.generic",
+    };
+  }
+  if (!data?.length) return { error: "doctorView.errors.notAllowed" };
+
+  revalidatePath(`/${locale}/doctors/${slug}`);
+  return { ok: true };
 }

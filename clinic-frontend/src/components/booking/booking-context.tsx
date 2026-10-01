@@ -3,24 +3,38 @@
 import { createContext, useContext, useMemo, useReducer, type ReactNode } from "react";
 import { useI18n } from "@/lib/i18n/i18n-provider";
 import { intlLocaleOf, type BookingAccess, type DaySlots } from "@/lib/doctors/types";
+import type { DoctorAppointment } from "@/lib/appointments/types";
+import type { PatientDraft, PatientEnumOptions } from "@/lib/patients/types";
 
-/* ---------- reducer ---------- */
-type State = { date: string; slot: string };
-type Action = { type: "selectDate"; date: string } | { type: "selectSlot"; slot: string };
+/* ---------- reducer: فقط انتخاب‌ها؛ داده‌ی اصلی از سرور می‌آید ---------- */
+type State = { date: string; slot: string; openApptId: string | null };
+type Action =
+  | { type: "selectDate"; date: string }
+  | { type: "selectSlot"; slot: string }
+  | { type: "openAppointment"; id: string }
+  | { type: "closeAppointment" };
+
+/** روز تعطیل / بدون برنامه؛ برای غیرپزشک روزی که همه‌ی ساعت‌هایش پر است هم غیرفعال است */
+const dayDisabled = (day: DaySlots, isOwner: boolean) =>
+  day.closed || day.slots.length === 0 || (!isOwner && day.slots.every((s) => s.booked));
 
 function reducer(state: State, action: Action): State {
   switch (action.type) {
     case "selectDate":
-      // با عوض شدن روز، ساعت قبلی پاک می‌شود
-      return state.date === action.date ? state : { date: action.date, slot: "" };
+      return state.date === action.date ? state : { ...state, date: action.date, slot: "" };
     case "selectSlot":
       return { ...state, slot: action.slot };
+    case "openAppointment":
+      return { ...state, openApptId: action.id };
+    case "closeAppointment":
+      return { ...state, openApptId: null };
   }
 }
 
-const initState = (days: DaySlots[]): State => ({
-  date: days.find((d) => d.slots.length > 0)?.date ?? days[0]?.date ?? "",
+const initState = ({ days, isOwner }: { days: DaySlots[]; isOwner: boolean }): State => ({
+  date: days.find((d) => !dayDisabled(d, isOwner))?.date ?? days[0]?.date ?? "",
   slot: "",
+  openApptId: null,
 });
 
 /* ---------- context ---------- */
@@ -33,6 +47,11 @@ export type BookingProviderProps = {
   fee: number | null;
   currency: string;
   access: BookingAccess;
+  /** فقط برای پزشکِ صاحب صفحه پر است */
+  appointments: DoctorAppointment[];
+  /** فقط وقتی پرونده‌ی بیمار ناقص است */
+  patientDraft: PatientDraft | null;
+  enumOptions: PatientEnumOptions | null;
 };
 
 type Formatters = {
@@ -42,18 +61,23 @@ type Formatters = {
   dayLabel: Intl.DateTimeFormat;
   time: Intl.DateTimeFormat;
   dateTime: Intl.DateTimeFormat;
-  /** "2026-10-03" -> Date (نیمه‌شب UTC؛ فرمت‌کننده‌های روز با timeZone=UTC استفاده می‌شوند) */
   toDate: (date: string) => Date;
 };
 
 type BookingContextValue = BookingProviderProps & {
+  isOwner: boolean;
   date: string;
-  /** فقط اگر واقعاً در لیست روز انتخابی باشد؛ وگرنه "" */
+  /** فقط اگر ساعتِ آزادِ روز انتخابی باشد؛ وگرنه "" */
   slot: string;
-  daySlots: string[];
+  daySlots: DaySlots["slots"];
   hasAnySlot: boolean;
+  isDayDisabled: (day: DaySlots) => boolean;
+  appointmentAt: (startsAt: string) => DoctorAppointment | undefined;
+  openAppt: DoctorAppointment | null;
   selectDate: (date: string) => void;
   selectSlot: (slot: string) => void;
+  openAppointment: (id: string) => void;
+  closeAppointment: () => void;
   fmt: Formatters;
 };
 
@@ -61,18 +85,12 @@ const BookingContext = createContext<BookingContextValue | null>(null);
 
 export function BookingProvider({
   children,
-  doctorId,
-  doctorSlug,
-  days,
-  timeZone,
-  slotMinutes,
-  fee,
-  currency,
-  access,
+  ...props
 }: BookingProviderProps & { children: ReactNode }) {
   const { locale } = useI18n();
   const intl = intlLocaleOf(locale);
-  const [state, dispatch] = useReducer(reducer, days, initState);
+  const isOwner = props.access === "doctor_owner";
+  const [state, dispatch] = useReducer(reducer, { days: props.days, isOwner }, initState);
 
   const fmt = useMemo<Formatters>(() => {
     const utc = { timeZone: "UTC" } as const;
@@ -80,17 +98,12 @@ export function BookingProvider({
       weekday: new Intl.DateTimeFormat(intl, { weekday: "short", ...utc }),
       day: new Intl.DateTimeFormat(intl, { day: "numeric", ...utc }),
       monthYear: new Intl.DateTimeFormat(intl, { month: "long", year: "numeric", ...utc }),
-      dayLabel: new Intl.DateTimeFormat(intl, {
-        weekday: "short",
-        month: "short",
-        day: "numeric",
-        ...utc,
-      }),
+      dayLabel: new Intl.DateTimeFormat(intl, { weekday: "short", month: "short", day: "numeric", ...utc }),
       time: new Intl.DateTimeFormat(intl, {
         hour: "2-digit",
         minute: "2-digit",
         hourCycle: "h23",
-        timeZone,
+        timeZone: props.timeZone,
       }),
       dateTime: new Intl.DateTimeFormat(intl, {
         weekday: "long",
@@ -99,32 +112,39 @@ export function BookingProvider({
         hour: "2-digit",
         minute: "2-digit",
         hourCycle: "h23",
-        timeZone,
+        timeZone: props.timeZone,
       }),
       toDate: (date) => new Date(`${date}T00:00:00Z`),
     };
-  }, [intl, timeZone]);
+  }, [intl, props.timeZone]);
+
+  const { days, appointments } = props;
 
   const value = useMemo<BookingContextValue>(() => {
     const daySlots = days.find((d) => d.date === state.date)?.slots ?? [];
+    const byStart = new Map(appointments.map((a) => [new Date(a.startAt).getTime(), a]));
+    const selectable = daySlots.some((s) => s.startsAt === state.slot && !s.booked);
+
     return {
-      doctorId,
-      doctorSlug,
-      days,
-      timeZone,
-      slotMinutes,
-      fee,
-      currency,
-      access,
+      ...props,
+      isOwner,
       date: state.date,
-      slot: daySlots.includes(state.slot) ? state.slot : "",
+      slot: selectable ? state.slot : "",
       daySlots,
-      hasAnySlot: days.some((d) => d.slots.length > 0),
+      hasAnySlot: days.some((d) => !dayDisabled(d, isOwner)),
+      isDayDisabled: (d) => dayDisabled(d, isOwner),
+      appointmentAt: (startsAt) => byStart.get(new Date(startsAt).getTime()),
+      // نوبت از props خوانده می‌شود، پس بعد از هر عمل خودکار تازه می‌شود
+      openAppt: appointments.find((a) => a.id === state.openApptId) ?? null,
       selectDate: (date) => dispatch({ type: "selectDate", date }),
       selectSlot: (slot) => dispatch({ type: "selectSlot", slot }),
+      openAppointment: (id) => dispatch({ type: "openAppointment", id }),
+      closeAppointment: () => dispatch({ type: "closeAppointment" }),
       fmt,
     };
-  }, [doctorId, doctorSlug, days, timeZone, slotMinutes, fee, currency, access, state, fmt]);
+    // props یک آبجکت جدید در هر رندر است؛ وابستگی‌های واقعی را جدا آورده‌ایم
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [days, appointments, state, isOwner, fmt, props.doctorId, props.doctorSlug, props.timeZone, props.slotMinutes, props.fee, props.currency, props.access, props.patientDraft, props.enumOptions]);
 
   return <BookingContext.Provider value={value}>{children}</BookingContext.Provider>;
 }

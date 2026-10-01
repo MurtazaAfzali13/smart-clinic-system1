@@ -5,7 +5,7 @@ import { useBooking } from "./booking-context";
 
 export function DateStrip() {
   const { t } = useI18n();
-  const { days, date, selectDate, fmt } = useBooking();
+  const { days, date, selectDate, fmt, isDayDisabled } = useBooking();
 
   return (
     <div className="space-y-3">
@@ -17,7 +17,7 @@ export function DateStrip() {
       </div>
       <div role="radiogroup" className="grid grid-cols-7 gap-1.5">
         {days.map((d) => {
-          const disabled = d.slots.length === 0;
+          const disabled = isDayDisabled(d);
           const selected = d.date === date;
           const dt = fmt.toDate(d.date);
           return (
@@ -27,11 +27,10 @@ export function DateStrip() {
               role="radio"
               aria-checked={selected}
               disabled={disabled}
+              title={d.closed ? t("booking.closedDay") : undefined}
               onClick={() => selectDate(d.date)}
               className={`flex flex-col items-center gap-0.5 rounded-xl px-1 py-2.5 transition-colors ${
-                selected
-                  ? "gradient-surface text-primary-foreground"
-                  : "glass hover:bg-secondary"
+                selected ? "gradient-surface text-primary-foreground" : "glass hover:bg-secondary"
               } ${disabled ? "cursor-not-allowed opacity-40 hover:bg-transparent" : ""}`}
             >
               <span className="text-[11px] opacity-80">{fmt.weekday.format(dt)}</span>

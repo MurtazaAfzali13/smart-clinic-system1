@@ -21,15 +21,6 @@ export type Doctor = {
   specialty: { slug: string; name_fa: string; name_en: string } | null;
 };
 
-/** date = روز تقویمی در منطقه‌ی زمانی کلینیک (YYYY-MM-DD)، slots = ISO شروع نوبت‌ها */
-export type DaySlots = { date: string; slots: string[] };
-
-export type BookingAccess = "guest" | "needs_profile" | "not_patient" | "ready";
-
-/**
- * برای فارسی از fa-AF استفاده می‌کنیم؛ تقویم پیش‌فرض آن معمولاً شمسی است.
- * اگر تقویم میلادی می‌خواهی بنویس: "fa-AF-u-ca-gregory"
- */
 export const intlLocaleOf = (locale: string) => (locale === "fa" ? "fa-AF" : "en-US");
 
 export const formatNumber = (n: number, locale: string) =>
@@ -60,3 +51,14 @@ export const specialtyName = (d: Doctor, locale: string) =>
 export const doctorBio = (d: Doctor, locale: string) => pick(locale, d.bio_fa, d.bio_en);
 export const doctorQualifications = (d: Doctor, locale: string) =>
   pick(locale, d.qualifications_fa, d.qualifications_en);
+
+export type SlotInfo = { startsAt: string; booked: boolean };
+
+export type DaySlots = { date: string; closed: boolean; slots: SlotInfo[] };
+
+export type BookingAccess =
+  | "guest"
+  | "needs_profile"
+  | "not_patient"
+  | "ready"
+  | "doctor_owner";

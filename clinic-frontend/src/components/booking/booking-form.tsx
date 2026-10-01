@@ -57,14 +57,6 @@ export function BookingForm() {
       {state.formError && (
         <div role="alert" className="space-y-2 rounded-xl bg-red-500/10 p-3 text-sm text-red-500">
           <p>{t(state.formError)}</p>
-          {state.needsProfile && (
-            <Link
-              href={`/${locale}/profile?next=${encodeURIComponent(`/${locale}/doctors/${b.doctorSlug}`)}`}
-              className="font-semibold underline"
-            >
-              {t("booking.completeProfileCta")}
-            </Link>
-          )}
         </div>
       )}
       <FieldError id="startAt-error" message={fe?.startAt && t(fe.startAt)} />

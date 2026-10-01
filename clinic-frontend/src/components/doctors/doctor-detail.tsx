@@ -2,7 +2,11 @@
 
 import { useMemo } from "react";
 import Link from "next/link";
+
 import { useI18n } from "@/lib/i18n/i18n-provider";
+import type { DoctorAppointment } from "@/lib/appointments/types";
+import type { PatientDraft, PatientEnumOptions } from "@/lib/patients/types";
+
 import {
   doctorBio,
   doctorName,
@@ -18,15 +22,15 @@ import { BookingPanel } from "@/components/booking/booking-panel";
 import { DoctorPhoto } from "./doctor-photo";
 
 export function DoctorDetail({
-  doctor,
-  days,
-  timeZone,
-  access,
+  doctor, days, timeZone, access, appointments, patientDraft, enumOptions,
 }: {
   doctor: Doctor;
   days: DaySlots[];
   timeZone: string;
   access: BookingAccess;
+  appointments: DoctorAppointment[];
+  patientDraft: PatientDraft | null;
+  enumOptions: PatientEnumOptions | null;
 }) {
   const { locale, t } = useI18n();
   const name = doctorName(doctor, locale);
@@ -115,6 +119,9 @@ export function DoctorDetail({
               fee={doctor.consultation_fee}
               currency={doctor.currency}
               access={access}
+              appointments={appointments}
+              patientDraft={patientDraft}
+              enumOptions={enumOptions}
             />
           ) : (
             <p className="glass rounded-3xl p-6 text-sm">{t("doctors.notAccepting")}</p>

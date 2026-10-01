@@ -349,8 +349,6 @@
   },
   "doctors": {
   "title": "پزشکان ما",
-   "title_main": "…مقدار قبلی خودت…",
-  "title_highlight": "…مقدار قبلی خودت…",
   "subtitle": "پزشک متخصص خود را انتخاب کنید و همین حالا نوبت بگیرید",
   "empty": "در حال حاضر پزشکی برای نمایش وجود ندارد",
   "viewProfile": "مشاهده و نوبت‌گیری",
@@ -372,6 +370,8 @@
 "booking": {
   "perVisit": "/ ویزیت",
   "selectDate": "روز را انتخاب کنید",
+    "closedDay": "این روز تعطیل است",
+  "slotBooked": "رزرو شده",
   "selectTime": "ساعت را انتخاب کنید",
   "noSlots": "در این روز نوبت خالی وجود ندارد",
   "noSlotsWeek": "در ۷ روز آینده نوبت خالی وجود ندارد",
@@ -408,5 +408,51 @@
     "profileIncomplete": "ابتدا پرونده‌ی خود را تکمیل کنید",
     "generic": "مشکلی پیش آمد، دوباره تلاش کنید"
   }
-}
+},
+"patientForm": {
+  "title": "تکمیل پرونده‌ی بیمار",
+  "subtitle": "این اطلاعات برای ثبت نوبت لازم است و فقط پزشکِ نوبت‌دار آن را می‌بیند. موارد ستاره‌دار اجباری هستند.",
+  "sections": {
+    "identity": "مشخصات هویتی",
+    "contact": "اطلاعات تماس و آدرس",
+    "medical": "اطلاعات پزشکی پایه",
+    "history": "سوابق پزشکی",
+    "emergency": "تماس اضطراری",
+    "insurance": "بیمه"
+  },
+  "linesHint": "هر مورد را در یک خط جدید بنویسید",
+  "fields": {
+    "firstName": "نام", "lastName": "نام خانوادگی", "fatherName": "نام پدر",
+    "nationalId": "شماره‌ی تذکره / کد ملی", "dateOfBirth": "تاریخ تولد", "gender": "جنسیت",
+    "maritalStatus": "وضعیت تأهل", "nationality": "ملیت", "occupation": "شغل",
+    "phone": "شماره‌ی تماس", "altPhone": "شماره‌ی تماس دیگر", "country": "کشور",
+    "stateProvince": "ولایت / استان", "city": "شهر", "addressLine": "آدرس", "postalCode": "کد پستی",
+    "bloodType": "گروه خونی", "heightCm": "قد (سانتی‌متر)", "weightKg": "وزن (کیلوگرم)",
+    "smokingStatus": "وضعیت سیگار", "usesAlcohol": "مصرف الکل", "isPregnant": "بارداری",
+    "familyHistory": "سابقه‌ی خانوادگی بیماری", "additionalNotes": "توضیحات تکمیلی",
+    "allergies": "حساسیت‌ها", "chronicConditions": "بیماری‌های مزمن",
+    "medications": "داروهای مصرفی", "surgeries": "جراحی‌های قبلی",
+    "ecName": "نام تماس اضطراری", "ecRelationship": "نسبت با شما", "ecPhone": "شماره‌ی تماس اضطراری",
+    "insuranceProvider": "شرکت بیمه", "insuranceNumber": "شماره‌ی بیمه", "insuranceExpiry": "تاریخ انقضای بیمه"
+  },
+  "options": {
+    "yesno": { "yes": "بله", "no": "خیر" },
+    "gender": { "male": "مرد", "female": "زن" }
+  },
+  "consent": "با ذخیره و پردازش اطلاعات پزشکی خود برای ثبت نوبت و درمان موافقم.",
+  "submit": "ذخیره و ادامه",
+  "saving": "در حال ذخیره...",
+  "errors": {
+    "required": "این فیلد اجباری است",
+    "tooLong": "متن خیلی طولانی است",
+    "invalidDate": "تاریخ معتبر وارد کنید",
+    "invalidNumber": "عدد معتبر وارد کنید",
+    "invalidPhone": "شماره‌ی تماس معتبر نیست",
+    "consentRequired": "برای ادامه باید موافقت کنید",
+    "nationalIdTaken": "این شماره قبلاً ثبت شده است",
+    "emergencyIncomplete": "برای تماس اضطراری هر سه فیلد را پر کنید",
+    "loginRequired": "ابتدا وارد حساب خود شوید",
+    "patientsOnly": "فقط حساب بیمار می‌تواند پرونده بسازد",
+    "generic": "مشکلی پیش آمد، دوباره تلاش کنید"
+  }}
 }

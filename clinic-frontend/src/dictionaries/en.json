@@ -375,6 +375,8 @@
   "noSlotsWeek": "No free slots in the next 7 days",
   "visitType": "Visit type",
   "firstVisit": "First visit",
+    "closedDay": "Closed on this day",
+  "slotBooked": "Booked",
   "followUp": "Follow-up",
   "reason": "Reason for visit",
   "reasonPlaceholder": "e.g. chest pain during exercise",
@@ -404,6 +406,88 @@
     "loginRequired": "Please sign in first",
     "patientsOnly": "Only patient accounts can book appointments",
     "profileIncomplete": "Please complete your profile first",
+    "generic": "Something went wrong, please try again"
+  }
+},
+"doctorView": {
+  "scheduleTitle": "Day schedule",
+  "noSchedule": "You have no working schedule in the next 7 days",
+  "freeSlot": "Free",
+  "unknownPatient": "Patient",
+  "paid": "Paid",
+  "unpaid": "Unpaid",
+  "patientInfo": "Patient details",
+  "visitInfo": "Visit details",
+  "medicalAlerts": "Medical history",
+  "phone": "Phone",
+  "age": "Age",
+  "years": "years",
+  "gender": "Gender",
+  "bloodType": "Blood type",
+  "city": "City",
+  "allergies": "Allergies",
+  "conditions": "Chronic conditions",
+  "medications": "Medications",
+  "feeTitle": "Consultation fee",
+  "markPaid": "Mark fee as received",
+  "markUnpaid": "Mark as unpaid",
+  "confirm": "Confirm",
+  "complete": "Complete visit",
+  "noShow": "No-show",
+  "cancelAppt": "Cancel",
+  "confirmCancel": "Cancel this appointment?",
+  "confirmNoShow": "Mark this patient as a no-show?",
+  "completeUnpaidConfirm": "The fee has not been received yet. Complete the visit anyway?",
+  "closedNote": "This appointment is closed and its status cannot be changed",
+  "errors": {
+    "closed": "This appointment is already closed",
+    "notAllowed": "You are not allowed to do this"
+  }
+},
+"patientForm": {
+  "title": "Complete your patient profile",
+  "subtitle": "This information is required to book and is visible only to your treating doctor. Fields marked * are required.",
+  "sections": {
+    "identity": "Identity",
+    "contact": "Contact & address",
+    "medical": "Basic medical information",
+    "history": "Medical history",
+    "emergency": "Emergency contact",
+    "insurance": "Insurance"
+  },
+  "linesHint": "Write each item on a new line",
+  "fields": {
+    "firstName": "First name", "lastName": "Last name", "fatherName": "Father's name",
+    "nationalId": "National ID", "dateOfBirth": "Date of birth", "gender": "Gender",
+    "maritalStatus": "Marital status", "nationality": "Nationality", "occupation": "Occupation",
+    "phone": "Phone", "altPhone": "Alternative phone", "country": "Country",
+    "stateProvince": "State / province", "city": "City", "addressLine": "Address", "postalCode": "Postal code",
+    "bloodType": "Blood type", "heightCm": "Height (cm)", "weightKg": "Weight (kg)",
+    "smokingStatus": "Smoking status", "usesAlcohol": "Alcohol use", "isPregnant": "Pregnant",
+    "familyHistory": "Family medical history", "additionalNotes": "Additional notes",
+    "allergies": "Allergies", "chronicConditions": "Chronic conditions",
+    "medications": "Current medications", "surgeries": "Previous surgeries",
+    "ecName": "Emergency contact name", "ecRelationship": "Relationship", "ecPhone": "Emergency contact phone",
+    "insuranceProvider": "Insurance provider", "insuranceNumber": "Insurance number", "insuranceExpiry": "Insurance expiry"
+  },
+  "options": {
+    "yesno": { "yes": "Yes", "no": "No" },
+    "gender": { "male": "Male", "female": "Female" }
+  },
+  "consent": "I agree to the storage and processing of my medical data for booking and treatment.",
+  "submit": "Save and continue",
+  "saving": "Saving...",
+  "errors": {
+    "required": "This field is required",
+    "tooLong": "Text is too long",
+    "invalidDate": "Enter a valid date",
+    "invalidNumber": "Enter a valid number",
+    "invalidPhone": "Phone number is not valid",
+    "consentRequired": "You must agree to continue",
+    "nationalIdTaken": "This number is already registered",
+    "emergencyIncomplete": "Fill all three emergency contact fields",
+    "loginRequired": "Please sign in first",
+    "patientsOnly": "Only patient accounts can create a profile",
     "generic": "Something went wrong, please try again"
   }
 }
