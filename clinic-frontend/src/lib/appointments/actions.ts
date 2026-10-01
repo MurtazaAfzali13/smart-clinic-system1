@@ -7,7 +7,9 @@ import { resolveLocale } from "@/lib/auth/locale";
 import { toFieldErrors } from "@/lib/auth/schemas";
 import { bookingSchema } from "@/lib/appointments/schemas";
 import type { BookingState } from "@/lib/appointments/types";
-import {DoctorActionState} from "@/lib/appointments/types"
+import { DoctorActionState } from "@/lib/appointments/types"
+
+import { z } from "zod";
 
 export async function bookAppointmentAction(
   _prev: BookingState,
@@ -67,12 +69,19 @@ export async function bookAppointmentAction(
   });
 
   if (error) {
+    console.error("[bookAppointment] insert failed", {
+      code: error.code,
+      message: error.message,
+      details: error.details,
+      hint: error.hint,
+    });
+
     const msg = error.message ?? "";
     if (error.code === "23P01" && msg.includes("patient_no_overlap")) {
       return { formError: "booking.errors.patientOverlap", values };
     }
     if (error.code === "23P01" || msg.includes("not available")) {
-      revalidatePath(`/${locale}/doctors/${slug}`); // لیست ساعت‌ها تازه شود
+      revalidatePath(`/${locale}/doctors/${slug}`);
       return { formError: "booking.errors.slotTaken", values };
     }
     return { formError: "booking.errors.generic", values };
