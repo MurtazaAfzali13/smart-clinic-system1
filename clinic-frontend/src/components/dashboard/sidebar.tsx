@@ -6,14 +6,14 @@ import { LayoutGrid, CalendarCheck, Stethoscope, UserRound, ClipboardList, Build
 import { useI18n, useT } from "@/lib/i18n/i18n-provider";
 
 const NAV = [
-  ["dashboard", LayoutGrid, ""],
-  ["appointments", CalendarCheck, "/appointments"],
-  ["doctors", Stethoscope, "/doctors"],
-  ["patients", UserRound, "/patients"],
-  ["prescriptions", ClipboardList, "/prescriptions"],
-  ["specialties", Building2, "/specialties"],
-  ["reports", BarChart3, "/reports"],
-  ["users", ShieldCheck, "/users"],
+  ["dashboard", LayoutGrid, "/dashboard"],
+  ["appointments", CalendarCheck, "/dashboard/appointments"],
+  ["doctors", Stethoscope, "/doctors"], 
+  ["patients", UserRound, "/dashboard/patients"],
+  ["prescriptions", ClipboardList, "/dashboard/prescriptions"],
+  ["specialties", Building2, "/dashboard/specialties"],
+  ["reports", BarChart3, "/dashboard/reports"],
+  ["users", ShieldCheck, "/dashboard/users"],
 ] as const;
 
 export function Sidebar() {
@@ -21,7 +21,8 @@ export function Sidebar() {
   const t = useT();
   const path = usePathname();
   const [cur, setCur] = useState("USD");
-  const base = `/${locale}/dashboard`;
+  
+  // متغیر base حذف شد
 
   return (
     <aside className="fd-sidebar" dir={dir}>
@@ -45,9 +46,13 @@ export function Sidebar() {
       </div>
 
       <nav className="mt-6 flex flex-1 flex-col gap-2.5 overflow-y-auto">
-        {NAV.map(([key, Icon, suffix]) => {
-          const href = `${base}${suffix}`;
-          const on = suffix === "" ? path === href : path.startsWith(href);
+        {NAV.map(([key, Icon, routePath]) => {
+          // ۲. آدرس نهایی با چسباندن locale و مسیر جدید ساخته می‌شود
+          const href = `/${locale}${routePath}`;
+          
+          // ۳. منطق active بودن لینک آپدیت شد
+          const on = routePath === "/dashboard" ? path === href : path.startsWith(href);
+          
           return (
             <Link key={key} href={href} className={`fd-item ${on ? "fd-item-on" : ""}`}>
               <span className={`grid h-10 w-10 place-items-center ${on ? "rounded-xl bg-white/15" : ""}`}>
