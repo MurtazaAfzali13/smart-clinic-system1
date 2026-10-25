@@ -1,35 +1,35 @@
 "use client";
-import type { ReactNode, ComponentType } from "react";
-import { ArrowUp, ArrowDown, ArrowRight, ChevronDown, ChevronsUp, Users, Activity, Coins, Layers, FileText } from "lucide-react";
+import { ArrowUp, ArrowDown, ArrowRight, ChevronDown, ChevronsUp, Coins, Layers, FileText } from "lucide-react";
 import { useT } from "@/lib/i18n/i18n-provider";
 import { Topbar, DateFilter } from "@/components/dashboard/topbar";
-import { Sparkline, AreaChart, Donut } from "@/components/dashboard/charts";
-import { kpis, xLabels, revenue, expenses, cashFlow, expenseBreakdown, projects, transactions } from "@/components/dashboard/data";
-
-const Card = ({ children, className = "" }: { children: ReactNode; className?: string }) => <section className={`fd-glass rounded-[20px] p-5 ${className}`}>{children}</section>;
-const Head = ({ Icon, title, right }: { Icon: ComponentType<{ className?: string }>; title: string; right?: ReactNode }) => (
-  <div className="flex items-center gap-3"><span className="fd-badge"><Icon className="h-[18px] w-[18px]" /></span><h2 className="flex-1 text-[17px] font-semibold">{title}</h2>{right}</div>
-);
-const Legend = ({ items }: { items: { label: string; amount: string; pct: number; dot: string }[] }) => (
-  <ul className="flex-1 space-y-3">
-    {items.map((i) => (
-      <li key={i.label} className="flex items-start gap-3">
-        <i className="mt-1.5 h-3 w-3 shrink-0 rounded-full" style={{ background: i.dot, boxShadow: `0 0 10px ${i.dot}` }} />
-        <div className="leading-tight"><div className="text-[14px] text-[#e6ecff]">{i.label}</div><div className="mt-0.5 text-[15px] font-semibold tabular-nums">{i.amount} <span className="ml-1 text-[13px] font-normal text-[#8fa0c8]">{i.pct}%</span></div></div>
-      </li>
-    ))}
-  </ul>
-);
+import { Sparkline, Donut } from "@/components/dashboard/charts";
+import { Card, Head } from "@/components/dashboard/primitives";
+import { DashboardScope } from "@/components/dashboard/scope-bar";
+import { AppointmentsTrendCard } from "@/components/dashboard/cards/appointments-trend-card";
+import { AppointmentStatusCard } from "@/components/dashboard/cards/appointment-status-card";
+import { QueryProvider } from "@/providers/query-provider";
+import { DashboardFilterProvider } from "@/features/dashboard/filter";
+import { kpis, expenseBreakdown, projects, transactions } from "@/components/dashboard/data";
 
 export default function DashboardPage() {
+  return (
+    <QueryProvider>
+      <DashboardFilterProvider>
+        <DashboardContent />
+      </DashboardFilterProvider>
+    </QueryProvider>
+  );
+}
+
+function DashboardContent() {
   const t = useT();
-  const cf = cashFlow.map((s, i) => ({ ...s, label: t(`dashboard.charts.${["operating", "investing", "financing"][i]}`) }));
-  const eb = expenseBreakdown.map((s) => ({ ...s })); // labels come from data.ts (Materials/Labor/...) — add dashboard.expenseCategories.* keys if these need translating too
+  const eb = expenseBreakdown;
 
   return (
     <div className="space-y-5">
       <Topbar />
       <DateFilter />
+      <DashboardScope />
 
       <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
         {kpis.map((k) => (
@@ -45,19 +45,8 @@ export default function DashboardPage() {
       </div>
 
       <div className="grid gap-5 xl:grid-cols-[minmax(0,1.52fr)_minmax(0,1fr)]">
-        <Card className="h-[285px] !rounded-3xl">
-          <Head Icon={Users} title={t("dashboard.charts.revenueVsExpenses")} right={<div className="flex gap-6 text-[14px]"><span className="flex items-center gap-2"><i className="h-3 w-3 rounded-full bg-[#22e58a] shadow-[0_0_8px_#22e58a]" />{t("dashboard.charts.revenue")}</span><span className="flex items-center gap-2"><i className="h-3 w-3 rounded-full bg-[#b44cff] shadow-[0_0_8px_#b44cff]" />{t("dashboard.charts.expenses")}</span></div>} />
-          <AreaChart labels={xLabels} series={[{ values: expenses, color: "#c04dff", id: "ar-e" }, { values: revenue, color: "#22e58a", id: "ar-r" }]} />
-        </Card>
-        <Card className="h-[285px] !rounded-3xl">
-          <Head Icon={Activity} title={t("dashboard.charts.cashFlow")} />
-          <div className="mt-3 flex items-center gap-5">
-            <Donut id="cf" segs={cf.map((s) => ({ value: s.pct, from: s.from, to: s.to }))}>
-              <div><div className="text-[24px] font-bold tabular-nums">$56,130</div><div className="mt-1 flex items-center justify-center gap-1 text-[12px]">{t("dashboard.charts.netCashFlow")}<ChevronsUp className="h-3 w-3 text-[#22e58a]" /></div></div>
-            </Donut>
-            <Legend items={cf} />
-          </div>
-        </Card>
+        <AppointmentsTrendCard />
+        <AppointmentStatusCard />
       </div>
 
       <div className="grid gap-5 lg:grid-cols-2 xl:grid-cols-[394fr_372fr_363fr]">

@@ -3,7 +3,7 @@
     "title": "Clinic | Online Appointments",
     "description": "Book online appointments with the best specialist doctors"
   },
-  "common": {
+  "common1": {
     "loading": "Loading...",
     "save": "Save",
     "cancel": "Cancel",
@@ -339,13 +339,41 @@
       "financing": "Financing Activities",
       "incomeByProject": "Income by Project",
       "expenseBreakdown": "Expense Breakdown",
-      "totalExpenses": "Total Expenses"
+      "totalExpenses": "Total Expenses",
+      "appointmentsTrend": "Appointments Overview",
+      "appointmentStatus": "Appointment Status",
+      "totalAppointments": "Total Appointments",
+      "total": "Total",
+      "completed": "Completed",
+      "cancelled": "Cancelled / No-show"
     },
     "transactions": {
       "title": "Recent Transactions",
       "viewAll": "View All",
       "paid": "Paid",
       "expected": "Expected"
+    },
+    "status": {
+      "completed": "Completed",
+      "confirmed": "Confirmed",
+      "pending": "Pending",
+      "cancelled": "Cancelled",
+      "no_show": "No-show"
+    },
+    "common": {
+      "error": "Failed to load data",
+      "retry": "Retry",
+      "empty": "No appointments in this period"
+    },
+    "scope": {
+      "doctorLabel": "Doctor",
+      "allDoctors": "All doctors",
+      "mineOnly": "Showing your own appointments only"
+    },
+    "roles": {
+      "admin": "Administrator",
+      "doctor": "Doctor",
+      "patient": "Patient"
     }
   },
   "doctors": {

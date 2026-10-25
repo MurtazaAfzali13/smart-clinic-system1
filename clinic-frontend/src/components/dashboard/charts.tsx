@@ -22,25 +22,40 @@ export function Sparkline({ values, color, id }: { values: number[]; color: stri
   );
 }
 
-export function AreaChart({ series, labels }: { series: { values: number[]; color: string; id: string }[]; labels: string[] }) {
+const niceMax = (m: number) => {
+  if (m <= 5) return 5;
+  const p = 10 ** Math.floor(Math.log10(m));
+  const n = m / p;
+  return (n <= 1 ? 1 : n <= 2 ? 2 : n <= 5 ? 5 : 10) * p;
+};
+
+type AreaSeries = { values: number[]; color: string; id: string; opacity?: number };
+
+export function AreaChart({ series, labels, ariaLabel, formatTick = String }: {
+  series: AreaSeries[]; labels: string[]; ariaLabel: string; formatTick?: (n: number) => string;
+}) {
   const W = 600, H = 200;
+  const data = series.map((s) => ({ ...s, values: s.values.length === 1 ? [s.values[0], s.values[0]] : s.values }));
+  const max = niceMax(Math.max(0, ...data.flatMap((s) => s.values)));
+  const ticks = [0, 1, 2, 3, 4, 5].map((i) => (max * (5 - i)) / 5);
+
   return (
     <div className="mt-4 grid grid-cols-[44px_1fr]">
       <div className="relative h-[190px]">
-        {[0, 1, 2, 3, 4, 5].map((i) => <span key={i} className="absolute right-3 -translate-y-1/2 text-[12px] text-[#8fa0c8]" style={{ top: `${i * 20}%` }}>{i === 5 ? "0" : `${100 - i * 20}K`}</span>)}
+        {ticks.map((v, i) => <span key={i} className="absolute right-3 -translate-y-1/2 text-[12px] text-[#8fa0c8]" style={{ top: `${i * 20}%` }}>{formatTick(v)}</span>)}
       </div>
       <div>
         <div className="relative mr-2 h-[190px] border-l border-white/10">
-          {[0, 1, 2, 3, 4, 5].map((i) => <div key={i} className={`absolute inset-x-0 border-t ${i === 5 ? "border-white/15" : "border-dashed border-white/[.07]"}`} style={{ top: `${i * 20}%` }} />)}
-          <svg viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="none" className="absolute inset-0 h-full w-full overflow-visible" role="img" aria-label="Revenue versus expenses, Jun 30 to Jul 30">
-            <defs>{series.map((s) => <Fill key={s.id} id={s.id} color={s.color} o={s.id === "ar-e" ? 0.4 : 0.28} />)}</defs>
-            {series.map((s) => { const l = smooth(pts(s.values, W, H, 100)); return (
+          {ticks.map((_, i) => <div key={i} className={`absolute inset-x-0 border-t ${i === 5 ? "border-white/15" : "border-dashed border-white/[.07]"}`} style={{ top: `${i * 20}%` }} />)}
+          <svg viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="none" className="absolute inset-0 h-full w-full overflow-visible" role="img" aria-label={ariaLabel}>
+            <defs>{data.map((s) => <Fill key={s.id} id={s.id} color={s.color} o={s.opacity ?? 0.3} />)}</defs>
+            {data.map((s) => { const l = smooth(pts(s.values, W, H, max)); return (
               <g key={s.id}><path d={`${l}L${W} ${H}L0 ${H}Z`} fill={`url(#${s.id})`} /><path d={l} fill="none" stroke={s.color} strokeWidth="2.5" vectorEffect="non-scaling-stroke" style={{ filter: `drop-shadow(0 0 6px ${s.color})` }} /></g>
             ); })}
           </svg>
-          {series.map((s) => <i key={s.id} className="absolute h-2.5 w-2.5 -translate-y-1/2 translate-x-1/2 rounded-full ring-2 ring-white/70" style={{ right: 0, top: `${100 - s.values[s.values.length - 1]}%`, background: s.color, boxShadow: `0 0 12px 3px ${s.color}` }} />)}
+          {data.map((s) => <i key={s.id} className="absolute h-2.5 w-2.5 -translate-y-1/2 translate-x-1/2 rounded-full ring-2 ring-white/70" style={{ right: 0, top: `${100 - (s.values[s.values.length - 1] / max) * 100}%`, background: s.color, boxShadow: `0 0 12px 3px ${s.color}` }} />)}
         </div>
-        <div className="mr-2 mt-3 flex justify-between px-2 text-[12px] text-[#c4d2f5]">{labels.map((l) => <span key={l}>{l}</span>)}</div>
+        <div className="mr-2 mt-3 flex justify-between px-2 text-[12px] text-[#c4d2f5]">{labels.map((l, i) => <span key={i}>{l}</span>)}</div>
       </div>
     </div>
   );

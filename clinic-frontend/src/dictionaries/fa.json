@@ -3,7 +3,7 @@
     "title": "کلینیک | نوبت‌دهی آنلاین",
     "description": "رزرو نوبت آنلاین از بهترین پزشکان متخصص"
   },
-  "common": {
+  "common1": {
     "loading": "در حال بارگذاری...",
     "save": "ذخیره",
     "cancel": "انصراف",
@@ -339,13 +339,41 @@
       "financing": "فعالیت‌های تأمین مالی",
       "incomeByProject": "درآمد به تفکیک پروژه",
       "expenseBreakdown": "تفکیک هزینه‌ها",
-      "totalExpenses": "هزینهٔ کل"
+      "totalExpenses": "هزینهٔ کل",
+      "appointmentsTrend": "نمای کلی نوبت‌ها",
+      "appointmentStatus": "وضعیت نوبت‌ها",
+      "totalAppointments": "مجموع نوبت‌ها",
+      "total": "کل نوبت‌ها",
+      "completed": "تکمیل‌شده",
+      "cancelled": "لغو / عدم حضور"
     },
     "transactions": {
       "title": "تراکنش‌های اخیر",
       "viewAll": "مشاهدهٔ همه",
       "paid": "پرداخت‌شده",
       "expected": "در انتظار"
+    },
+    "status": {
+      "completed": "تکمیل‌شده",
+      "confirmed": "تأییدشده",
+      "pending": "در انتظار",
+      "cancelled": "لغوشده",
+      "no_show": "عدم حضور"
+    },
+    "common": {
+      "error": "بارگذاری داده ناموفق بود",
+      "retry": "تلاش دوباره",
+      "empty": "در این بازه نوبتی ثبت نشده است"
+    },
+    "scope": {
+      "doctorLabel": "داکتر",
+      "allDoctors": "همه داکتران",
+      "mineOnly": "فقط نوبت‌های شما نمایش داده می‌شود"
+    },
+    "roles": {
+      "admin": "مدیر",
+      "doctor": "داکتر",
+      "patient": "بیمار"
     }
   },
   "doctors": {
