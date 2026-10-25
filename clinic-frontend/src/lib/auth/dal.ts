@@ -7,11 +7,9 @@ export type UserRole = "patient" | "doctor" | "admin";
 
 export const ROLE_HOME: Record<UserRole, string> = {
   patient: "/dashboard",
-  doctor: "/doctor",
+  doctor: "/dashboard",
   admin: "/admin",
 };
-
-/** کاربر فعلی + نقش از جدول profiles. cache یعنی در یک درخواست فقط یک‌بار اجرا می‌شود. */
 export const getCurrentUser = cache(async () => {
   const supabase = await createClient();
 
