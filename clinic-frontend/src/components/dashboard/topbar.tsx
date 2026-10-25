@@ -1,15 +1,19 @@
 "use client";
-import { useState } from "react";
 import { Bell, Calendar, ChevronDown, Search, Sun, Clock } from "lucide-react";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { useI18n, useT } from "@/lib/i18n/i18n-provider";
+import { useMyContext } from "@/features/auth/my-context";
+import { useDashboardFilter, useDashboardFilterDispatch, type Preset } from "@/features/dashboard/filter";
 
-const today = new Date(2026, 6, 28);
+const today = new Date(2026, 6, 28); // فعلاً static، در مرحله‌ی بعد new Date() می‌شود
 const dtFmt = (locale: string) => new Intl.DateTimeFormat(locale, { weekday: "long", year: "numeric", month: "long", day: "numeric" });
 
 export function Topbar() {
   const t = useT();
   const { locale } = useI18n();
+  const { data: me } = useMyContext();
+  const initials = (me?.fullName ?? "").split(" ").filter(Boolean).map((w) => w[0]).slice(0, 2).join("").toUpperCase();
+
   return (
     <header className="flex flex-wrap items-start justify-between gap-4">
       <div>
@@ -26,8 +30,11 @@ export function Topbar() {
           </div>
           <button aria-label={t("dashboard.topbar.notificationsAria")} className="fd-pill relative grid h-10 w-10 place-items-center rounded-full"><Bell className="h-5 w-5" /><i className="absolute end-1 top-0 h-3 w-3 rounded-full bg-[#ff3ea5] shadow-[0_0_10px_#ff3ea5]" /></button>
           <div className="flex items-center gap-3">
-            <Avatar className="h-11 w-11 ring-2 ring-[#2f7bff]/60 shadow-[0_0_18px_rgba(47,123,255,.7)]"><AvatarFallback className="bg-gradient-to-br from-[#2f7bff] to-[#1440c8] font-semibold text-white">MA</AvatarFallback></Avatar>
-            <div className="leading-tight"><div className="text-sm font-semibold">Murtaza Afzali</div><div className="text-xs text-[#8fa0c8]">Administrator</div></div>
+            <Avatar className="h-11 w-11 ring-2 ring-[#2f7bff]/60 shadow-[0_0_18px_rgba(47,123,255,.7)]"><AvatarFallback className="bg-gradient-to-br from-[#2f7bff] to-[#1440c8] font-semibold text-white">{initials || "؟"}</AvatarFallback></Avatar>
+            <div className="leading-tight">
+              <div className="text-sm font-semibold">{me?.fullName}</div>
+              <div className="text-xs text-[#8fa0c8]">{me ? t(`dashboard.roles.${me.role}`) : ""}</div>
+            </div>
             <ChevronDown className="h-4 w-4 text-[#8fa0c8]" />
           </div>
         </div>
@@ -40,14 +47,26 @@ export function Topbar() {
 export function DateFilter() {
   const t = useT();
   const { locale } = useI18n();
-  const options = ["last7", "thisMonth", "thisYear", "custom"] as const;
-  const [on, setOn] = useState<(typeof options)[number]>("thisMonth");
+  const { state, range } = useDashboardFilter();
+  const dispatch = useDashboardFilterDispatch();
+  const options: Preset[] = ["last7", "thisMonth", "thisYear", "custom"];
+  const fmt = new Intl.DateTimeFormat(locale, { year: "numeric", month: "2-digit", day: "2-digit" });
+  const d = (s: string) => fmt.format(new Date(`${s}T00:00:00`));
+  const dateInput = "fd-pill rounded-lg px-3 py-1.5 text-[13px] text-white [color-scheme:dark]";
+
   return (
     <div className="fd-filter flex flex-wrap items-center gap-3 rounded-2xl px-4 py-3">
       <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#4d9bff" strokeWidth="1.8" strokeLinejoin="round" aria-hidden><path d="M3 4h18l-7 8.5V20l-4-2v-5.5z" /></svg>
       <span className="me-2 text-[15px] font-medium">{t("dashboard.dateFilter.label")}</span>
-      {options.map((o) => <button key={o} className="fd-chip" data-on={on === o} onClick={() => setOn(o)}>{t(`dashboard.dateFilter.${o}`)}</button>)}
-      <div className="fd-pill ms-auto flex items-center gap-3 rounded-full px-5 py-2 text-[15px]"><Clock className="h-5 w-5 text-[#9db0e0]" />{new Intl.DateTimeFormat(locale, { month: "2-digit", day: "2-digit" }).format(new Date(2026, 5, 30))} – {new Intl.DateTimeFormat(locale, { month: "2-digit", day: "2-digit", year: "numeric" }).format(today)}</div>
+      {options.map((o) => <button key={o} className="fd-chip" data-on={state.preset === o} onClick={() => dispatch({ type: "preset", preset: o })}>{t(`dashboard.dateFilter.${o}`)}</button>)}
+      {state.preset === "custom" && (
+        <div className="flex items-center gap-2">
+          <input type="date" className={dateInput} value={state.customFrom} onChange={(e) => e.target.value && dispatch({ type: "custom", from: e.target.value, to: state.customTo })} />
+          –
+          <input type="date" className={dateInput} value={state.customTo} onChange={(e) => e.target.value && dispatch({ type: "custom", from: state.customFrom, to: e.target.value })} />
+        </div>
+      )}
+      <div className="fd-pill ms-auto flex items-center gap-3 rounded-full px-5 py-2 text-[15px]"><Clock className="h-5 w-5 text-[#9db0e0]" />{d(range.from)} – {d(range.to)}</div>
     </div>
   );
 }
