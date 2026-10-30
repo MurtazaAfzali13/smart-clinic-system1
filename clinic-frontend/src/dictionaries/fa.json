@@ -345,7 +345,13 @@
       "totalAppointments": "مجموع نوبت‌ها",
       "total": "کل نوبت‌ها",
       "completed": "تکمیل‌شده",
-      "cancelled": "لغو / عدم حضور"
+      "cancelled": "لغو / عدم حضور",
+      "byWeekday": "نوبت‌ها به تفکیک روز هفته",
+      "bySpecialty": "نوبت‌ها به تفکیک تخصص",
+      "byVisitType": "نوع مراجعه",
+      "firstVisit": "مراجعه‌ی اول",
+      "followUp": "مراجعه‌ی مجدد",
+      "other": "سایر"
     },
     "transactions": {
       "title": "تراکنش‌های اخیر",
@@ -363,7 +369,8 @@
     "common": {
       "error": "بارگذاری داده ناموفق بود",
       "retry": "تلاش دوباره",
-      "empty": "در این بازه نوبتی ثبت نشده است"
+      "empty": "در این بازه نوبتی ثبت نشده است",
+      "unspecified": "نامشخص"
     },
     "scope": {
       "doctorLabel": "داکتر",

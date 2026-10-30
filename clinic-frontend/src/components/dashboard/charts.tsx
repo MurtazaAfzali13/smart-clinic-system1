@@ -80,3 +80,42 @@ export function Donut({ id, segs, size = 190, stroke = 24, gap = 6, children }: 
     </div>
   );
 }
+
+export type BarItem = { key: string; label: string; value: number; highlight?: boolean };
+
+export function BarChart({ bars, ariaLabel, formatValue = String, height = 150 }: {
+  bars: BarItem[]; ariaLabel: string; formatValue?: (n: number) => string; height?: number;
+}) {
+  const max = niceMax(Math.max(0, ...bars.map((b) => b.value)));
+  const ticks = [0, 1, 2, 3, 4, 5].map((i) => (max * (5 - i)) / 5);
+  return (
+    <div role="img" aria-label={ariaLabel}>
+      <div className="relative ms-11 mt-4" style={{ height }}>
+        {ticks.map((v, i) => (
+          <div key={i} className="absolute inset-x-0 border-t border-dashed border-white/[.07]" style={{ top: `${i * 20}%` }}>
+            <span className="absolute -start-11 w-9 -translate-y-1/2 text-end text-[12px] text-[#8fa0c8]">{formatValue(v)}</span>
+          </div>
+        ))}
+        <div className="absolute inset-0 flex items-end">
+          {bars.map((b) => (
+            <div key={b.key} className="flex h-full flex-1 items-end justify-center">
+              <div
+                className="relative w-[60%] max-w-[38px] rounded-t-md"
+                style={{
+                  height: `${(b.value / max) * 100}%`,
+                  background: b.highlight ? "linear-gradient(180deg,#c26bff,#8a3cff)" : "linear-gradient(180deg,#1aa6ff,#1f5bff)",
+                  boxShadow: b.highlight ? "0 0 16px rgba(180,76,255,.5)" : "0 0 16px rgba(47,123,255,.5)",
+                }}
+              >
+                {b.value > 0 && <span className="absolute inset-x-0 -top-4 text-center text-[11px] leading-4 tabular-nums text-[#c4d2f5]">{formatValue(b.value)}</span>}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+      <div className="ms-11 mt-2 flex">
+        {bars.map((b) => <span key={b.key} className="flex-1 text-center text-[11px] leading-[14px] text-[#c4d2f5]">{b.label}</span>)}
+      </div>
+    </div>
+  );
+}

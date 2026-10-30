@@ -345,7 +345,13 @@
       "totalAppointments": "Total Appointments",
       "total": "Total",
       "completed": "Completed",
-      "cancelled": "Cancelled / No-show"
+      "cancelled": "Cancelled / No-show",
+      "byWeekday": "Appointments by Weekday",
+      "bySpecialty": "Appointments by Specialty",
+      "byVisitType": "Visit Type",
+      "firstVisit": "First visit",
+      "followUp": "Follow-up",
+      "other": "Other"
     },
     "transactions": {
       "title": "Recent Transactions",
@@ -363,7 +369,8 @@
     "common": {
       "error": "Failed to load data",
       "retry": "Retry",
-      "empty": "No appointments in this period"
+      "empty": "No appointments in this period",
+      "unspecified": "Unspecified"
     },
     "scope": {
       "doctorLabel": "Doctor",

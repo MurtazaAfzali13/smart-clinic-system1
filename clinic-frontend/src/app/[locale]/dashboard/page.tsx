@@ -1,15 +1,18 @@
 "use client";
-import { ArrowUp, ArrowDown, ArrowRight, ChevronDown, ChevronsUp, Coins, Layers, FileText } from "lucide-react";
+import { ArrowUp, ArrowDown, ArrowRight, ChevronsUp, FileText } from "lucide-react";
 import { useT } from "@/lib/i18n/i18n-provider";
 import { Topbar, DateFilter } from "@/components/dashboard/topbar";
-import { Sparkline, Donut } from "@/components/dashboard/charts";
+import { Sparkline } from "@/components/dashboard/charts";
 import { Card, Head } from "@/components/dashboard/primitives";
 import { DashboardScope } from "@/components/dashboard/scope-bar";
 import { AppointmentsTrendCard } from "@/components/dashboard/cards/appointments-trend-card";
 import { AppointmentStatusCard } from "@/components/dashboard/cards/appointment-status-card";
 import { QueryProvider } from "@/providers/query-provider";
 import { DashboardFilterProvider } from "@/features/dashboard/filter";
-import { kpis, expenseBreakdown, projects, transactions } from "@/components/dashboard/data";
+import { kpis, transactions } from "@/components/dashboard/data";
+
+import { WeekdayCard } from "@/components/dashboard/cards/weekday-card";
+import { SpecialtyCard } from "@/components/dashboard/cards/specialty-card";
 
 export default function DashboardPage() {
   return (
@@ -23,7 +26,6 @@ export default function DashboardPage() {
 
 function DashboardContent() {
   const t = useT();
-  const eb = expenseBreakdown;
 
   return (
     <div className="space-y-5">
@@ -50,31 +52,8 @@ function DashboardContent() {
       </div>
 
       <div className="grid gap-5 lg:grid-cols-2 xl:grid-cols-[394fr_372fr_363fr]">
-        <Card className="h-[288px]">
-          <Head Icon={Coins} title={t("dashboard.charts.incomeByProject")} right={<button className="fd-pill flex items-center gap-2 rounded-lg px-3 py-1.5 text-[12px]">{t("dashboard.dateFilter.thisMonth")}<ChevronDown className="h-3.5 w-3.5" /></button>} />
-          <div className="relative ms-11 mt-4 h-[150px]">
-            {[0, 1, 2, 3, 4, 5].map((i) => <div key={i} className="absolute inset-x-0 border-t border-dashed border-white/[.07]" style={{ top: `${i * 20}%` }}><span className="absolute -start-11 w-9 -translate-y-1/2 text-end text-[12px] text-[#8fa0c8]">{i === 5 ? "0" : `${50 - i * 10}K`}</span></div>)}
-            <div className="absolute inset-0 flex items-end">
-              {projects.map((p) => <div key={p.name} className="flex w-1/5 justify-center"><div className="w-[38px] rounded-t-md" style={{ height: `${(p.v / 50) * 150}px`, background: "purple" in p ? "linear-gradient(180deg,#c26bff,#8a3cff)" : "linear-gradient(180deg,#1aa6ff,#1f5bff)", boxShadow: "purple" in p ? "0 0 16px rgba(180,76,255,.5)" : "0 0 16px rgba(47,123,255,.5)" }} /></div>)}
-            </div>
-          </div>
-          <div className="ms-11 mt-2 flex">{projects.map((p) => <span key={p.name} className="w-1/5 text-center text-[11px] leading-[14px] text-[#c4d2f5]">{p.name}</span>)}</div>
-        </Card>
-
-        <Card className="h-[288px]">
-          <Head Icon={Layers} title={t("dashboard.charts.expenseBreakdown")} />
-          <div className="mt-4 flex items-center gap-4">
-            <Donut id="eb" size={170} stroke={22} gap={5} segs={eb.map((s) => ({ value: s.pct, from: s.from, to: s.to }))}>
-              <div><div className="text-[20px] font-bold tabular-nums">$68,430</div><div className="text-[11px]">{t("dashboard.charts.totalExpenses")}</div></div>
-            </Donut>
-            <ul className="flex-1 space-y-2.5">
-              {eb.map((i) => (
-                <li key={i.label} className="flex items-start gap-2.5"><i className="mt-1.5 h-2.5 w-2.5 shrink-0 rounded-full" style={{ background: i.dot, boxShadow: `0 0 8px ${i.dot}` }} />
-                  <div className="leading-tight"><div className="text-[13px]">{i.label}</div><div className="text-[13px] font-semibold tabular-nums">{i.amount} <span className="font-normal text-[#8fa0c8]">({i.pct}%)</span></div></div></li>
-              ))}
-            </ul>
-          </div>
-        </Card>
+        <WeekdayCard />
+        <SpecialtyCard />
 
         <Card className="h-[288px]">
           <Head Icon={FileText} title={t("dashboard.transactions.title")} right={<a href="./transactions" className="flex items-center gap-1 text-[12px] text-[#4d9bff]">{t("dashboard.transactions.viewAll")}<ArrowRight className="h-3.5 w-3.5 rtl:rotate-180" /></a>} />
